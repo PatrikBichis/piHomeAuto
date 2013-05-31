@@ -1,0 +1,16 @@
+{
+  "name": "piHomeAuto",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "3.2.5",
+    "jade": "*",
+    "less-middleware": "*"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  }
+}
