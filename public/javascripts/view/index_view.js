@@ -7,17 +7,38 @@ $(function(){
 
     self.loadUnits = function(){
       $.get("/tellstick/list", function(data){
-        console.log(data);
-        self.units(data);
+        self.units(JSON.parse(data));
       }); 
     }
 
-    self.deviceOn = function(unit) { 
-      console.log(unit.device + "On") 
-      
+    self.sendDeviceValue = function(data){
+      $.ajax({
+            type: "POST",
+            url: "/Tellstick/SetDevice", // your POST target goes here
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data), // message to send goes here
+            success: function (data)
+            {
+                self.units(JSON.parse(data));
+            }
+        }); 
     }
+
+    self.deviceOn = function(unit) { 
+      if(unit.currentValue !== true){
+        var data = {unitAdress : unit.unitAdress, newValue : true};
+
+        self.sendDeviceValue(data);
+      }
+    }
+
     self.deviceOff = function(unit) { 
-      console.log(unit.device + "Off") 
+      if(unit.currentValue !== false){
+        var data = {unitAdress : unit.unitAdress, newValue : false};
+
+        self.sendDeviceValue(data);
+      }
     }
 
     self.loadUnits();
