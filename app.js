@@ -36,7 +36,6 @@ app.get('/net', routes.net);
 
 // Added API for tellstick
 app.get('/Tellstick/List', tellstick.list);
-app.post('/Tellstick/List', tellstick.list);
 app.post('/Tellstick/SetDevice', tellstick.setDevice);
 
 http.createServer(app).listen(app.get('port'), function(){
