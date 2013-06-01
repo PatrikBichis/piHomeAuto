@@ -5,13 +5,18 @@ $(function(){
 
     self.units = ko.observableArray([]);
 
+    self.waiting = ko.observable(false);
+
     self.loadUnits = function(){
+      self.waiting(true);
       $.get("/tellstick/list", function(data){
         self.units(JSON.parse(data));
+        self.waiting(false);
       }); 
     }
 
     self.sendDeviceValue = function(data){
+      self.waiting(true);
       $.ajax({
             type: "POST",
             url: "/Tellstick/SetDevice", // your POST target goes here
@@ -21,6 +26,7 @@ $(function(){
             success: function (data)
             {
                 self.units(JSON.parse(data));
+                self.waiting(false);
             }
         }); 
     }
