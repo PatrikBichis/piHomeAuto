@@ -25,6 +25,13 @@ $(function(){
         }); 
     }
 
+    self.deviceClicked = function(unit){
+        
+        var data = {unitAdress : unit.unitAdress, newValue : unit.currentValue};
+
+        self.sendDeviceValue(data);
+    }
+
     self.deviceOn = function(unit) { 
       if(unit.currentValue !== true){
         var data = {unitAdress : unit.unitAdress, newValue : true};

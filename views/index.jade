@@ -3,9 +3,9 @@ extends layout
 block content
   h1 piHomeAuto
   br
-  pre Enheter i huset
+  h4 Enheter i huset
   div.span4
-    table.table
+    table.striped
       thead
         tr 
           th Plats
@@ -15,10 +15,8 @@ block content
           td
             p(data-bind="text: device ")
           td 
-            div.btn-group
-              a(href="#", data-bind="click: $root.deviceOn, css: { 'btn-primary': currentValue === true }").btn On
-              a(href="#", data-bind="click: $root.deviceOff, css: { 'btn-primary': currentValue === false }").btn Off
-
-  
-    
-    
+            div
+              label.input-control.switch
+                input(type="checkbox", data-bind="checked: currentValue, click: $root.deviceClicked" )
+                span.helper 
+              
