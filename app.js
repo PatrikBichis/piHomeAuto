@@ -8,6 +8,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , tellstick = require('./routes/tellstick')
+  , nmap = require('./routes/nmap')
   , path = require('path');
 
 var app = express();
@@ -31,6 +32,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/net', routes.net);
 
 // Added API for tellstick
 app.get('/Tellstick/List', tellstick.list);

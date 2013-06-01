@@ -13,5 +13,9 @@
  	]; 
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express', units: units });
+  res.render('index', { title: 'piHomeAuto', units: units });
 };
+
+exports.net = function(req, res){
+	  res.render('net', { title: 'piHomeAuto' });
+	};
