@@ -33,14 +33,14 @@ $(function(){
 
     self.deviceClicked = function(unit){
         
-        var data = {unitAdress : unit.unitAdress, newValue : unit.currentValue};
+        var data = {id : unit.id, newValue : unit.currentValue};
 
         self.sendDeviceValue(data);
     }
 
     self.deviceOn = function(unit) { 
       if(unit.currentValue !== true){
-        var data = {unitAdress : unit.unitAdress, newValue : true};
+        var data = {unitAdress : unit.id, newValue : true};
 
         self.sendDeviceValue(data);
       }
@@ -48,7 +48,7 @@ $(function(){
 
     self.deviceOff = function(unit) { 
       if(unit.currentValue !== false){
-        var data = {unitAdress : unit.unitAdress, newValue : false};
+        var data = {unitAdress : unit.id, newValue : false};
 
         self.sendDeviceValue(data);
       }
