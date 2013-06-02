@@ -32,7 +32,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.get('/net', routes.net);
+app.get('/net', nmap.list);
 
 // Added API for tellstick
 app.get('/Tellstick/List', tellstick.list);
