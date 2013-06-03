@@ -19,7 +19,7 @@ function getNetworkDevices(callback){
 			console.log(error);
 			callback(body);
 		}
-	}).auth('admin', 'pambo0409', true);
+	}).auth('user', 'password', true);
 }
 
 
