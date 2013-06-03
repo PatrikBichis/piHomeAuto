@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1 piHomeAuto
+  br
+  h4 Enheter på nätverket
+  img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
+  div.span4
+    table.striped
+      thead
+        tr 
+          th Enhet
+          th Ip-adress
+          th MAC-adress
+          th Interface
+      tbody(data-bind="foreach: units")
+        tr
+          td
+            p(data-bind="text: DeviceName")
+          td 
+            p(data-bind="text: IpAdress")
+          td 
+            p(data-bind="text: MacAdress")
+          td 
+            p(data-bind="text: Interface")
+
+  script(type='text/javascript', src='/javascripts/view/router_view.js');
+
+            

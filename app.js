@@ -9,6 +9,7 @@ var express = require('express')
   , http = require('http')
   , tellstick = require('./routes/tellstick')
   , nmap = require('./routes/nmap')
+  , router = require('./routes/router')
   , path = require('path');
 
 var app = express();
@@ -33,10 +34,16 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/net', nmap.list);
+app.get('/router', function(req, res){
+	res.render('router', { title: 'piHomeAuto' });
+})
 
 // Added API for tellstick
 app.get('/Tellstick/List', tellstick.list);
 app.post('/Tellstick/SetDevice', tellstick.setDevice);
+
+// Added API for router information
+app.get('/Router/getNetworkMap', router.getNetworkMap);
 
 
 

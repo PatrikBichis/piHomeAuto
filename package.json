@@ -9,6 +9,8 @@
     "express": "3.2.5",
     "jade": "*",
     "less-middleware": "*",
+    "request": "*",
+    "string": "*",
     "piHomeAutoConfig": "https://github.com/x-firm/piHomeAutoConfig/tarball/master"
   },
   "devDependencies": {
