@@ -11,7 +11,8 @@
     "less-middleware": "*",
     "request": "*",
     "string": "*",
-    "piHomeAutoConfig": "https://github.com/x-firm/piHomeAutoConfig/tarball/master"
+    "piHomeAutoConfig": "https://github.com/x-firm/piHomeAutoConfig/tarball/master",
+    "tdtool-js": "https://github.com/x-firm/tdtool-js/tarball/master"
   },
   "devDependencies": {
     "nodemon": "*"
