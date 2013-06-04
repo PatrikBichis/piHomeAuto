@@ -1,6 +1,8 @@
 var request = require('request');	// Simpler request library
 var S = require('string');			// Extra string functions
 
+var config = require('piHomeAutoConfig').piHomeAutoConfig().routerConfig;
+
 function getNetworkMap(req, res){
 	getNetworkDevices(function(data){
 		res.json(JSON.stringify(data)); 
@@ -9,7 +11,7 @@ function getNetworkMap(req, res){
 
 // Make an html request to the router for the Network Map
 function getNetworkDevices(callback){
-	request.get('http://192.168.0.1/AdvancedNetworkMap.htm', function (error, response, body) {
+	request.get('http://'+config.ip+'/AdvancedNetworkMap.htm', function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			findNetworkDevicesInBody(function(data){
 				callback(data);
@@ -19,7 +21,7 @@ function getNetworkDevices(callback){
 			console.log(error);
 			callback(body);
 		}
-	}).auth('user', 'password', true);
+	}).auth(config.user, config.password, true);
 }
 
 
