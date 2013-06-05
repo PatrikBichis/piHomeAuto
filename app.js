@@ -7,9 +7,9 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , tellstick = require('./routes/tellstick')
+  , tellstick = require('./routes/api/tellstick')
   , nmap = require('./routes/nmap')
-  , router = require('./routes/router')
+  , router = require('./routes/api/router')
   , path = require('path');
 
 var app = express();
