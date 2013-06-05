@@ -33,7 +33,11 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.get('/net', nmap.list);
+
+app.get('/net', function(req, res){
+	res.render('net', { title: 'piHomeAuto' });
+})
+
 app.get('/router', function(req, res){
 	res.render('router', { title: 'piHomeAuto' });
 })
@@ -44,6 +48,7 @@ app.post('/Tellstick/SetDevice', tellstick.setDevice);
 
 // Added API for router information
 app.get('/Router/getNetworkMap', router.getNetworkMap);
+app.get('/Router/getNmap', nmap.list);
 
 
 

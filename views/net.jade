@@ -1,9 +1,20 @@
 extends layout
 
 block content
-  h1 piHomeAuto - network
-  networking
- 
-  
-    
-    
+  h1 piHomeAuto
+  br
+  h4 Enheter på nätverket
+   img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
+  div.span4
+    table.striped
+      thead
+        tr
+          th Namn 
+          th Ip-adress
+      tbody(data-bind="foreach: units")
+        tr
+          td
+            p(data-bind="text: name")
+          td 
+            p(data-bind="text: ip")
+  script(type='text/javascript', src='/javascripts/view/net_view.js');
