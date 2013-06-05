@@ -8,7 +8,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , tellstick = require('./routes/api/tellstick')
-  , nmap = require('./routes/nmap')
+  , nmap = require('./routes/api/nmap')
   , router = require('./routes/api/router')
   , path = require('path');
 
