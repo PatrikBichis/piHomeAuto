@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'piHomeAuto' });
+  res.render('index', { title: 'piHomeAuto', subTitle: 'Enheter' });
 };
