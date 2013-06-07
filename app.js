@@ -35,11 +35,11 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 app.get('/net', function(req, res){
-	res.render('net', { title: 'piHomeAuto' });
+	res.render('net', { title: 'piHomeAuto' }, subTitle: 'Enheter på nätverket' });
 })
 
 app.get('/router', function(req, res){
-	res.render('router', { title: 'piHomeAuto' });
+	res.render('router', { title: 'piHomeAuto' }, subTitle: 'Enheter på nätverket' });
 })
 
 // Added API for tellstick

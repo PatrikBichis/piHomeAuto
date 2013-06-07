@@ -9,5 +9,64 @@ html
     script(type='text/javascript', src='/javascripts/knockout-2.1.0.js');
     script(type='text/javascript', src='/javascripts/knockout.mapping-latest.js');
     script(type='text/javascript', src='/javascripts/metroui/input-control.js')
+
+    script(type="text/javascript", src="/javascripts/metroui/dropdown.js")
+    script(type="text/javascript", src="/javascripts/metroui/accordion.js")
+    script(type="text/javascript", src="/javascripts/metroui/buttonset.js")
+    script(type="text/javascript", src="/javascripts/metroui/carousel.js")
+    script(type="text/javascript", src="/javascripts/metroui/pagecontrol.js")
+    script(type="text/javascript", src="/javascripts/metroui/rating.js")
+    script(type="text/javascript", src="/javascripts/metroui/slider.js")
+    script(type="text/javascript", src="/javascripts/metroui/tile-slider.js")
+    script(type="text/javascript", src="/javascripts/metroui/tile-drag.js")
+    script(type="text/javascript", src="/javascripts/metroui/calendar.js")
+
+
   body
-    block content
+    
+    div.page
+        div.nav-bar
+            div.nav-bar-inner.padding10
+                span.pull-menu
+
+                a(href="/")
+                    span.element.brand
+                        //-img(src="images/logo32.png", style="height: 20px").place-left
+                        p piHomeAuto 
+                            small 0.0.1
+
+                div.divider
+
+                ul.menu
+                    li
+                        a(href="/") Home
+                    li(data-role="dropdown")
+                        a(href="#") Meny
+                        ul.dropdown-menu
+                            li
+                                a(href="/") Units
+                            li
+                                a(href="/router") Network Map
+
+                    li
+                        a(href="https://github.com/x-firm/piHomeAuto") Source
+
+    div.page.secondary
+        div.page-header
+            div.page-header-content
+                h1 #{title} 
+                    small #{subTitle}
+                a(href="/").back-button.big.page-back
+
+        div.page-region
+            div.page-region-content
+                div.grid
+                    div.row
+                        block content
+
+    div.page
+        div.nav-bar
+            div.nav-bar-inner.padding10
+                span.element 2012-2013, piHomAuto &copy; 
+
+                
