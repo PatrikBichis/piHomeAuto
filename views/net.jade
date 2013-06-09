@@ -5,16 +5,19 @@ block content
   //- br
   //- h4 Enheter på nätverket
    img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
-  div.span4
+  div.span8
     table.striped
       thead
         tr
           th Namn 
           th Ip-adress
+          th Mac-adress
       tbody(data-bind="foreach: units")
         tr
           td
             p(data-bind="text: name")
           td 
             p(data-bind="text: ip")
+          td 
+            p(data-bind="text: mac")
   script(type='text/javascript', src='/javascripts/view/net_view.js');

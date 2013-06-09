@@ -1,35 +1,51 @@
 var sys = require('sys');
 var exec = require('child_process').exec;
 var child;
-
+//Fetch from config file not implemented yet.
 var subnet = '13.37.1.0/24';
-//Correct output, needs to be json formatted and distingisued by ip AND name if possible.
-//Atm shows name if possible but then skips ip
+//Now shows name if lookup is possible and mac / ip-address.
 var findActiveHosts = function(callback) {
-	data = [];
-	var str = "nmap --system-dns -sn " + subnet + " | grep " + subnet.slice(0, - 4)
+	var str = "sudo nmap --system-dns -sn " + subnet + " | sed '2d' | head -n -1 | sed '/Host is up/d'"
 	child = exec(str, function (error, stdout, stderr) {
 		if (error !== null) {
 			console.log('exec error: ' + error);
 	    }
 		else {
-			var devices = stdout.split("\n");
-			for (x in devices) {
-				devices[x] = devices[x].substring(21);
-				if(devices[x].indexOf('(') === -1) {
-					devices[x] = 'unknown ' + devices[x];
-				}
-				devices[x] = devices[x].replace("(", "");
-				devices[x] = devices[x].replace(")", "");
-				var tmpSplit = devices[x].split(" ");
-				var tmpJson = {
+			var devices = [];
+			var mac = [];
+			var tmpArr = stdout.split("\n");
+			for (x in tmpArr) {
+				if(tmpArr[x].indexOf('Nmap') !== -1) {
+					tmpArr[x] = tmpArr[x].substring(21);
+					if(tmpArr[x].indexOf('(') === -1) {
+						tmpArr[x] = 'unknown ' + tmpArr[x];
+					}
+					tmpArr[x] = tmpArr[x].replace("(","");
+					tmpArr[x] = tmpArr[x].replace(")","");
+					var tmpSplit = tmpArr[x].split(" ");
+					var tmpJson = {
 						"name":	tmpSplit[0],
-						"ip": tmpSplit[1]
+				        "ip": tmpSplit[1],
+					}
+					devices[x] = tmpJson;					
+                    // If no mac in nmap output for host, fill in Unknown.
+				    if(tmpArr[x++].indexOf('MAC') === -1) {
+                        mac[x] = "Unknown";
+                    }
 				}
-				devices[x] = tmpJson;
+				if(tmpArr[x].indexOf('MAC') !== -1) {
+					tmpArr[x] = tmpArr[x].substring(13);
+					tmpArr[x] = tmpArr[x].replace("(","");
+					tmpArr[x] = tmpArr[x].replace(")","");
+					mac[x] = tmpArr[x];
+				}
 			}
-			devices.pop(); //remove last element, its an empty row.
-			//console.log(devices);
+			devices = devices.filter(function(n){return n}); //Removes all empty elements
+			mac = mac.filter(function(n){return n}); //Removes all empty elements
+			for (x in devices) {
+				devices[x].mac = mac[x];
+			}
+			console.log(devices);
 			callback(devices);
 		}
 	});
