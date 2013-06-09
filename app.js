@@ -8,6 +8,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , tellstick = require('./routes/api/tellstick')
+  , controll = require('./routes/api/controll')
   , nmap = require('./routes/api/nmap')
   , router = require('./routes/api/router')
   , path = require('path');
@@ -45,6 +46,10 @@ app.get('/router', function(req, res){
 // Added API for tellstick
 app.get('/Tellstick/List', tellstick.list);
 app.post('/Tellstick/SetDevice', tellstick.setDevice);
+
+// Added API for groups
+app.get('/Controll/ListGroups', controll.listGroups);
+app.post('/Controll/SetGroup', controll.setGroup);
 
 // Added API for router information
 app.get('/Router/getNetworkMap', router.getNetworkMap);
