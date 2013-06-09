@@ -45,7 +45,6 @@ var findActiveHosts = function(callback) {
 			for (x in devices) {
 				devices[x].mac = mac[x];
 			}
-			console.log(devices);
 			callback(devices);
 		}
 	});
