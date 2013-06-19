@@ -4,22 +4,21 @@ block content
   //- h1 piHomeAuto
   //- br
   //- h4 Enheter i huset
-  img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
-  div.span4
-    table.striped
-      thead
-        tr 
-          th Plats
-          th Status
-      tbody(data-bind="foreach: units")
-        tr
-          td
-            p(data-bind="text: name")
-          td 
-            div
-              label.input-control.switch
-                input(type="checkbox", data-bind="checked: currentValue, click: $root.deviceClicked" )
-                span.helper 
-                
-  script(type='text/javascript', src='/javascripts/view/index_view.js');
-              
+  a(href="/groups")
+    div.tile.icon.bg-color-blue
+      div.tile-content
+          img(src="/images/share.svg")
+      div.brand
+        span.name Grupper
+  a(href="/units")
+    div.tile.icon.bg-color-blue
+      div.tile-content
+          img(src="/images/lightbulb.svg")
+      div.brand
+        span.name Enheter
+  a(href="/router")        
+    div.tile.icon.bg-color-blue
+      div.tile-content
+          img(src="/images/rss_alt.svg")
+      div.brand
+        span.name Nätverk

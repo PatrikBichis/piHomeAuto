@@ -4,12 +4,14 @@ html
     title= title
     //link(rel='stylesheet', href='/stylesheets/style.css')
     //link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/modern.css')
+    link(rel='stylesheet', href='/stylesheets/modern.css');
+    link(rel='stylesheet', href='/stylesheets/modern-responsive.css');
+    link(rel='stylesheet', href='/stylesheets/site.css');
     script(type='text/javascript', src='/javascripts/jquery-1.8.0.min.js');
     script(type='text/javascript', src='/javascripts/knockout-2.1.0.js');
     script(type='text/javascript', src='/javascripts/knockout.mapping-latest.js');
-    script(type='text/javascript', src='/javascripts/metroui/input-control.js')
-    script(type="text/javascript", src="/javascripts/metroui/dropdown.js")
+    script(type='text/javascript', src='/javascripts/metroui/input-control.js');
+    script(type="text/javascript", src="/javascripts/metroui/dropdown.js");
    
     //- script(type="text/javascript", src="/javascripts/metroui/accordion.js")
     //- script(type="text/javascript", src="/javascripts/metroui/buttonset.js")
@@ -39,34 +41,40 @@ html
 
                 ul.menu
                     li
-                        a(href="/") Home
+                        a(href="/") Start
                     li(data-role="dropdown")
                         a(href="#") Meny
                         ul.dropdown-menu
                             li
-                                a(href="/") Units
+                                a(href="/units") Enheter
+                            li
+                                a(href="/groups") Grupper
                             li
                                 a(href="/router") Network Map
-
                     li
                         a(href="https://github.com/x-firm/piHomeAuto") Source
 
     div.page.secondary
-        div.page-header
-            div.page-header-content
-                h1 #{title} 
-                    small #{subTitle}
-                a(href="/").back-button.big.page-back
-
+        if(noHeader)
+            // No header is selected 
+            div.page-header  
+                div.page-header-content
+        else
+            div.page-header
+                div.page-header-content
+                    h1 #{title} 
+                        small #{subTitle}
+                    a(href="/").back-button.big.page-back        
+                    
         div.page-region
             div.page-region-content
                 div.grid
                     div.row
                         block content
 
-    div.page
-        div.nav-bar
-            div.nav-bar-inner.padding10
-                span.element 2012-2013, piHomAuto &copy; 
+    //div.page
+    //    div.nav-bar
+    //        div.nav-bar-inner.padding10
+    //            span.element 2012-2013, piHomAuto &copy; 
 
                 

@@ -39,6 +39,14 @@ app.get('/net', function(req, res){
 	res.render('net', { title: 'piHomeAuto', subTitle: 'Enheter på nätverket' });
 })
 
+app.get('/units', function(req, res){
+  res.render('units', { title: 'piHomeAuto', subTitle: 'Enheter' });
+})
+
+app.get('/groups', function(req, res){
+	res.render('groups', { title: 'piHomeAuto', subTitle: 'Grupper' });
+})
+
 app.get('/router', function(req, res){
 	res.render('router', { title: 'piHomeAuto', subTitle: 'Enheter på nätverket' });
 })

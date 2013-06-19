@@ -9,8 +9,7 @@ exports.listGroups = function(req, res){
   res.json(JSON.stringify(controll.groups)); 
 }
 
-// Set an tellstick device to new value and 
-// response with the new state of the devices
+// Set an group of units to a new value
 // 
 exports.setGroup = function(req, res){
   // Check that request was a JSON req.
@@ -19,24 +18,13 @@ exports.setGroup = function(req, res){
     // the bodyParser has allready parsed the JSON string
     // in the req.body
     var data = req.body;
-    /*
-    changeAllUnits(function(){
-      // Response with the new state of the devices
-      tdtool.readTellstickList(function(data){
-        res.json(JSON.stringify(data));
-      }, units);
-    }, data.units);
 
-     
+    console.log(data);
 
     // Set the device to the new value
-    tdtool.setTellstickUnitValue(function(){
-      // Response with the new state of the devices
-      tdtool.readTellstickList(function(data){
-        res.json(JSON.stringify(data));
-      }, units);
-    }, data.id, data.newValue, units);
-    */
+    tdtool.setTellstickUnitGroupValue(function(){
+      res.json(JSON.stringify(true));
+    }, data.units, data.value);
   }
 };
 
