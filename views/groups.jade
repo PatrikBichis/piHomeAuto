@@ -5,12 +5,12 @@ block content
   //- br
   //- h4 Enheter på nätverket
   img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
-  div.span8
+  div.span6
     table.striped
       thead
         tr
           th Id
-          th Description
+          th Beskrivning
           th On
           th Off
       tbody(data-bind="foreach: groups")
@@ -22,7 +22,7 @@ block content
           td
             a(href="#", data-bind="click: $root.groupOn").button.default On
           td
-            a(href="#", data-bind="click: $root.groupOff").button OfF
+            a(href="#", data-bind="click: $root.groupOff").button Off
 
   script(type='text/javascript', src='/javascripts/view/groups_view.js');
 

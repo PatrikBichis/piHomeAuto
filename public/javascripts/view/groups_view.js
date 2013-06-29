@@ -9,7 +9,7 @@ $(function(){
 
     self.loadGroups = function(){
       self.waiting(true);
-      $.get("/Controll/ListGroups", function(data){
+      $.get("/Control/ListGroups", function(data){
         self.groups(JSON.parse(data));
         self.waiting(false);
       }); 
@@ -19,7 +19,7 @@ $(function(){
       self.waiting(true);
       $.ajax({
             type: "POST",
-            url: "/Controll/SetGroup", // your POST target goes here
+            url: "/Control/SetGroup", // your POST target goes here
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify(data), // message to send goes here

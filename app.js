@@ -8,8 +8,9 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , tellstick = require('./routes/api/tellstick')
-  , controll = require('./routes/api/controll')
+  , control = require('./routes/api/control')
   , nmap = require('./routes/api/nmap')
+  , sonos = require('./routes/api/sonos')
   , router = require('./routes/api/router')
   , path = require('path');
 
@@ -51,19 +52,27 @@ app.get('/router', function(req, res){
 	res.render('router', { title: 'piHomeAuto', subTitle: 'Enheter på nätverket' });
 })
 
+app.get('/sonos', function(req, res){
+  res.render('sonos', { title: 'piHomeAuto', subTitle: 'Sonos enheter' });
+})
+
 // Added API for tellstick
 app.get('/Tellstick/List', tellstick.list);
 app.post('/Tellstick/SetDevice', tellstick.setDevice);
 
 // Added API for groups
-app.get('/Controll/ListGroups', controll.listGroups);
-app.post('/Controll/SetGroup', controll.setGroup);
+app.get('/Control/ListGroups', control.listGroups);
+app.post('/Control/SetGroup', control.setGroup);
+app.get('/Control/List', control.list);
+app.post('/Control/SetDevice', control.setDevice);
 
 // Added API for router information
 app.get('/Router/getNetworkMap', router.getNetworkMap);
 app.get('/Router/getNmap', nmap.list);
 
-
+// Added API for sonos 
+app.post('/Sonos/getSonosDeviceInfo', sonos.getSonosDeviceInfo);
+app.get('/Sonos/listDevices', sonos.listDevices);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
