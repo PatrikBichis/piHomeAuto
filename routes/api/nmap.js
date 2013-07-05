@@ -1,11 +1,17 @@
 var sys = require('sys');
 var exec = require('child_process').exec;
 var child;
-//Fetch from config file not implemented yet.
-var config = require('piHomeAutoConfig').piHomeAutoConfig().routerConfig;
+var os = require('os');
+
+var networkInterfaces = os.networkInterfaces();
+var net = networkInterfaces.eth0[0].address;
+net = net.slice(0, net.lastIndexOf('.')) + '.0/24';
+
+console.log('my network is: ' + net);
+
 //Now shows name if lookup is possible and mac / ip-address.
 var findActiveHosts = function(callback) {
-	var str = "sudo nmap --system-dns -sn " + config.network + " | sed '2d' | head -n -1 | sed '/Host is up/d'"
+	var str = "sudo nmap --system-dns -sn " + net + " | sed '2d' | head -n -1 | sed '/Host is up/d'"
 	child = exec(str, function (error, stdout, stderr) {
 		if (error !== null) {
 			console.log('exec error: ' + error);
