@@ -40,6 +40,13 @@ app.get('/net', function(req, res){
 	res.render('net', { title: 'piHomeAuto', subTitle: 'Enheter på nätverket' });
 })
 
+app.get('/map', function(req, res){
+  res.render('map', { title: 'piHomeAuto', subTitle: 'Karta' });
+})
+app.get('/map_edit', function(req, res){
+  res.render('map_edit', { title: 'piHomeAuto', subTitle: 'Editera karta' });
+})
+
 app.get('/units', function(req, res){
   res.render('units', { title: 'piHomeAuto', subTitle: 'Enheter' });
 })
