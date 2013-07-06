@@ -73,6 +73,15 @@ $(function(){
 
     self.loadUnits();
   }
+/*
+  function map(x, in_min, in_maxm out_min, out_max){  
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  }
+
+  $("#dim").on("change", function(e, val){
+      console.log(e);
+  })*/
+
 
   var vm = new Devices();
   ko.applyBindings(vm);

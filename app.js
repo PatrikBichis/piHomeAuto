@@ -52,10 +52,6 @@ app.get('/groups', function(req, res){
 	res.render('groups', { title: 'piHomeAuto', subTitle: 'Grupper' });
 })
 
-app.get('/router', function(req, res){
-	res.render('router', { title: 'piHomeAuto', subTitle: 'Enheter på nätverket' });
-})
-
 app.get('/sonos', function(req, res){
   res.render('sonos', { title: 'piHomeAuto', subTitle: 'Sonos enheter' });
 })
