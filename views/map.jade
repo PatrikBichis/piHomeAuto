@@ -5,6 +5,8 @@ block content
   //- br
   //- h4 Testkarta
   div.span8
-    a(href='/map_edit') Edit
+    a(href='#', onclick='editMode()') Edit
+    |
+    a(href='#', onclick='savePos()') Save
     canvas#canvas1(width='1000', height='766')
   script(type='text/javascript', src='/javascripts/view/map.js');
