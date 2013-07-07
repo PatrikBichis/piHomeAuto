@@ -11,7 +11,6 @@ var express = require('express')
   , control = require('./routes/api/control')
   , nmap = require('./routes/api/nmap')
   , sonos = require('./routes/api/sonos')
-  , router = require('./routes/api/router')
   , path = require('path');
 
 var app = express();
@@ -67,7 +66,6 @@ app.get('/Control/List', control.list);
 app.post('/Control/SetDevice', control.setDevice);
 
 // Added API for router information
-app.get('/Router/getNetworkMap', router.getNetworkMap);
 app.get('/Router/getNmap', nmap.list);
 
 // Added API for sonos 
