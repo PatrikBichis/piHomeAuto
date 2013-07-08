@@ -65,12 +65,16 @@ app.post('/Control/SetGroup', control.setGroup);
 app.get('/Control/List', control.list);
 app.post('/Control/SetDevice', control.setDevice);
 
-// Added API for router information
-app.get('/Router/getNmap', nmap.list);
+// Added API for Nmap information
+app.get('/Nmap/net', nmap.list)
 
 // Added API for sonos 
 app.post('/Sonos/getSonosDeviceInfo', sonos.getSonosDeviceInfo);
 app.get('/Sonos/listDevices', sonos.listDevices);
+app.post('/Sonos/play', sonos.play);
+app.post('/Sonos/pause', sonos.pause);
+app.post('/Sonos/stop', sonos.stop);
+app.post('/Sonos/mute', sonos.mute);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
