@@ -12,7 +12,8 @@
     "request": "*",
     "string": "*",
     "piHomeAutoConfig": "https://github.com/x-firm/piHomeAutoConfig/tarball/master",
-    "tdtool-js": "https://github.com/x-firm/tdtool-js/tarball/master"
+    "tdtool-js": "https://github.com/x-firm/tdtool-js/tarball/master",
+    "sonos": "https://github.com/bencevans/node-sonos/tarball/master"
   },
   "devDependencies": {
     "nodemon": "*"

@@ -35,14 +35,19 @@ function eachUnitInGroup(callback, group, value, units, length, i){
   if( i < length ) {
     getArrayIndexFromElementId(function(id){
       var unit = units[id];
+      var id = id;
       // Check if an tellstick device
       if (unit.type == 1) {
         
         // Set the device to the new value
         tdtool.setTellstickUnitValue(function(){
-          // Response with the new state of the devices
+          
+          // Update the collection with the new value
+          units[id].currentValue = value;
+
+          // Change the next one
           eachUnitInGroup(callback, group, value, units, length, i + 1 );
-        }, unit.unitId, value, id, units); 
+        }, unit.unitId, value); 
         
       }else{
         eachUnitInGroup(callback, group, value, units, length, i + 1 );
@@ -88,9 +93,14 @@ exports.setDevice = function(req, res){
           {
             // Set the device to the new value
             tdtool.setTellstickUnitValue(function(){
+              
+              // Update collection with the new value
+              units[id].currentValue = data.newValue;
+              units[id].currentDimValue = 255;
+
               // Response with the new state of the devices
               res.json(JSON.stringify(units));
-            }, unit.unitId, data.newValue, id, units); 
+            }, unit.unitId, data.newValue); 
           // Check if is an dimmer
           }else{ 
             // Check that the unit is possible to dim
@@ -98,9 +108,14 @@ exports.setDevice = function(req, res){
             {
               // Dim the device to the new value
               tdtool.setTellstickUnitDimValue(function(){
+                
+                // Update collection with the new value
+                units[id].currentValue = true;
+                units[id].currentDimValue = data.newDimValue;
+
                 // Response with the new state of the devices
                 res.json(JSON.stringify(units));
-              }, unit.unitId, data.newDimValue, id, units); 
+              }, unit.unitId, data.newDimValue); 
             }else{
               console.log("No dimmer");
               res.json(JSON.stringify(units));

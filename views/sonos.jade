@@ -1,27 +1,37 @@
 extends layout
 
 block content
-    //- h1 piHomeAuto
+  //- h1 piHomeAuto
   //- br
   //- h4 Enheter på nätverket
   img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
-  div.span4
+  div.span6
     table.striped
       thead
         tr 
           th Namn
           th Ip-adress
-          th MAC-adress
-          th Interface
+          th Typ
+          th Kontroller
       tbody(data-bind="foreach: units")
         tr
           td
             p(data-bind="text: name")
           td 
-            p inget
+            p(data-bind="text: host")
           td 
-            p inget
+            p(data-bind="text: type")
           td 
-            p inget\
+            div(data-bind="visible: type != 6").toolbar
+              button(data-bind="click: $root.infoClicked").default Visa 
+                i.icon-info
+              button(data-bind="click: $root.playClicked")
+                i.icon-play
+              button(data-bind="click: $root.pauseClicked")
+                i.icon-pause
+              button(data-bind="click: $root.stopClicked")
+                i.icon-stop
+              button(data-bind="click: $root.muteClicked")
+                i.icon-volume-mute
 
   script(type='text/javascript', src='/javascripts/view/sonos_view.js');            

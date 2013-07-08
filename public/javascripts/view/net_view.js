@@ -9,7 +9,7 @@ $(function(){
 
     self.loadUnits = function(){
       self.waiting(true);
-      $.get("/Router/getNmap", function(data){
+      $.get("/Nmap/net", function(data){
         self.units(JSON.parse(data));
         self.waiting(false);
       }); 

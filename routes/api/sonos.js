@@ -17,13 +17,98 @@ exports.getSonosDeviceInfo = function(req, res){
 
 		s.getZoneAttrs(function(err, device){
 			var data = {};
-			console.log(s);
-			console.log(device);
 			data.name = device.CurrentZoneName;
+
+			s.getTopology(function(err, output){
+				console.log(s);
+				console.log(device);
+				console.log(output);
+			});
+			
 
 			// Return the data with the Sonos devices
 			res.json(JSON.stringify(data)); 
 		});
+	}else{
+		res.send(404);
+	}		
+};
+
+exports.play = function(req, res){
+	// Check that request was a JSON req.
+	if(req.is('application/json')){
+
+		// the bodyParser has allready parsed the JSON string
+		// in the req.body
+		var data = req.body;
+
+		var s = new sonos.Sonos(data.host, data.port);
+
+		s.play(function(err, playing) {
+		  console.log([err, playing]);
+		  res.send(200);
+		});
+
+	}else{
+		res.send(404);
+	}		
+};
+
+exports.pause = function(req, res){
+	// Check that request was a JSON req.
+	if(req.is('application/json')){
+
+		// the bodyParser has allready parsed the JSON string
+		// in the req.body
+		var data = req.body;
+
+		var s = new sonos.Sonos(data.host, data.port);
+
+		s.pause(function(err, paused) {
+		  console.log([err, paused]);
+		  res.send(200);
+		});
+		
+	}else{
+		res.send(404);
+	}		
+};
+
+exports.stop = function(req, res){
+	// Check that request was a JSON req.
+	if(req.is('application/json')){
+
+		// the bodyParser has allready parsed the JSON string
+		// in the req.body
+		var data = req.body;
+
+		var s = new sonos.Sonos(data.host, data.port);
+
+		s.stop(function(err, stoped) {
+		  console.log([err, stoped]);
+		  res.send(200);
+		});
+		
+	}else{
+		res.send(404);
+	}		
+};
+
+exports.mute = function(req, res){
+	// Check that request was a JSON req.
+	if(req.is('application/json')){
+
+		// the bodyParser has allready parsed the JSON string
+		// in the req.body
+		var data = req.body;
+
+		var s = new sonos.Sonos(data.host, data.port);
+
+		sonos.setMuted(function(err, muted) {
+		  console.log([err, muted]);
+		  res.send(200);
+		});
+		
 	}else{
 		res.send(404);
 	}		
@@ -43,7 +128,7 @@ function getInfoFromDevice(callback, device, devicesInformation){
 	var devicesInformation = devicesInformation;
 
 	s.getZoneAttrs(function(err, data){
-		devicesInformation.push({name: data.CurrentZoneName}); 
+		devicesInformation.push({name: data.CurrentZoneName, host: device.host, type: device.type}); 
 		callback(devicesInformation);
 	}, devicesInformation);
 }

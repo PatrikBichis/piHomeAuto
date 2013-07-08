@@ -7,20 +7,54 @@ $(function(){
 
     self.waiting = ko.observable(false);
 
-    self.getDeviceInfo = function(){
-      self.waiting(true);
+    self.postData = function(callback, service, data){
       $.ajax({
-            type: "POST",
-            url: "/Sonos/getSonosDeviceInfo", // your POST target goes here
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify({host: '192.168.0.21', port: 1400}), // message to send goes here
-            success: function (data)
-            {
-              self.units(JSON.parse(data));
-              self.waiting(false);
-            }
-        }); 
+        type: "POST",
+        url: "/Sonos/"+service, // your POST target goes here
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data), // message to send goes here
+        success: callback
+      }); 
+    }
+
+    self.getDeviceInfo = function(data){
+      self.waiting(true);
+
+      self.postData(function(data){
+        //self.units(JSON.parse(data));
+        self.waiting(false);
+      }, "getSonosDeviceInfo", data);
+    }
+
+    self.sendCommand = function(command, data){
+      self.waiting(true);
+
+      self.postData(function(data){
+        //self.units(JSON.parse(data));
+        self.waiting(false);
+      }, command, data);
+    }
+
+
+    self.infoClicked = function(data){
+      self.getDeviceInfo(data);
+    }
+
+    self.playClicked= function(data){
+      self.sendCommand("play", data);
+    }
+
+    self.pauseClicked= function(data){
+      self.sendCommand("pause", data);
+    }
+
+    self.stopClicked= function(data){
+      self.sendCommand("stop", data);
+    }
+
+    self.muteClicked= function(data){
+      self.sendCommand("mute", data);
     }
 
     self.loadList = function(){
