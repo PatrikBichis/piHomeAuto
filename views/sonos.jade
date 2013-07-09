@@ -32,6 +32,6 @@ block content
               button(data-bind="click: $root.stopClicked")
                 i.icon-stop
               button(data-bind="click: $root.muteClicked")
-                i.icon-volume-mute
+                i(data-bind="css: { 'icon-volume-mute': muted == true, 'icon-volume-3': muted == false }")
 
   script(type='text/javascript', src='/javascripts/view/sonos_view.js');            

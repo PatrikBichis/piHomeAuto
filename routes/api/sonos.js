@@ -19,13 +19,6 @@ exports.getSonosDeviceInfo = function(req, res){
 			var data = {};
 			data.name = device.CurrentZoneName;
 
-			s.getTopology(function(err, output){
-				console.log(s);
-				console.log(device);
-				console.log(output);
-			});
-			
-
 			// Return the data with the Sonos devices
 			res.json(JSON.stringify(data)); 
 		});
@@ -45,8 +38,11 @@ exports.play = function(req, res){
 		var s = new sonos.Sonos(data.host, data.port);
 
 		s.play(function(err, playing) {
-		  console.log([err, playing]);
-		  res.send(200);
+		  var data = [];
+			getInfoFromDevices(function(data){
+				// Return the data with the Sonos devices
+				res.json(JSON.stringify(data));
+			}, units, data, units.length, 0);
 		});
 
 	}else{
@@ -65,8 +61,11 @@ exports.pause = function(req, res){
 		var s = new sonos.Sonos(data.host, data.port);
 
 		s.pause(function(err, paused) {
-		  console.log([err, paused]);
-		  res.send(200);
+		  var data = [];
+			getInfoFromDevices(function(data){
+				// Return the data with the Sonos devices
+				res.json(JSON.stringify(data));
+			}, units, data, units.length, 0);
 		});
 		
 	}else{
@@ -85,8 +84,11 @@ exports.stop = function(req, res){
 		var s = new sonos.Sonos(data.host, data.port);
 
 		s.stop(function(err, stoped) {
-		  console.log([err, stoped]);
-		  res.send(200);
+		  var data = [];
+			getInfoFromDevices(function(data){
+				// Return the data with the Sonos devices
+				res.json(JSON.stringify(data));
+			}, units, data, units.length, 0);
 		});
 		
 	}else{
@@ -94,7 +96,7 @@ exports.stop = function(req, res){
 	}		
 };
 
-exports.mute = function(req, res){
+exports.muteOn = function(req, res){
 	// Check that request was a JSON req.
 	if(req.is('application/json')){
 
@@ -104,9 +106,35 @@ exports.mute = function(req, res){
 
 		var s = new sonos.Sonos(data.host, data.port);
 
-		sonos.setMuted(function(err, muted) {
-		  console.log([err, muted]);
-		  res.send(200);
+		s.setMuted(true, function(err, muted) {
+		  var data = [];
+			getInfoFromDevices(function(data){
+				// Return the data with the Sonos devices
+				res.json(JSON.stringify(data));
+			}, units, data, units.length, 0);
+		});
+		
+	}else{
+		res.send(404);
+	}		
+};
+
+exports.muteOff = function(req, res){
+	// Check that request was a JSON req.
+	if(req.is('application/json')){
+
+		// the bodyParser has allready parsed the JSON string
+		// in the req.body
+		var data = req.body;
+
+		var s = new sonos.Sonos(data.host, data.port);
+
+		s.setMuted(false, function(err, muted) {
+		  var data = [];
+			getInfoFromDevices(function(data){
+				// Return the data with the Sonos devices
+				res.json(JSON.stringify(data));
+			}, units, data, units.length, 0);
 		});
 		
 	}else{
@@ -128,8 +156,15 @@ function getInfoFromDevice(callback, device, devicesInformation){
 	var devicesInformation = devicesInformation;
 
 	s.getZoneAttrs(function(err, data){
-		devicesInformation.push({name: data.CurrentZoneName, host: device.host, type: device.type}); 
-		callback(devicesInformation);
+		var zoneName = data.CurrentZoneName;
+		s.getMuted(function(err, data){
+			var muted = false;
+
+			if(data != undefined) muted = data;
+
+			devicesInformation.push({name: zoneName, host: device.host, type: device.type, muted: muted}); 
+			callback(devicesInformation);
+		});
 	}, devicesInformation);
 }
 

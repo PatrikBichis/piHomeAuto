@@ -31,11 +31,10 @@ $(function(){
       self.waiting(true);
 
       self.postData(function(data){
-        //self.units(JSON.parse(data));
         self.waiting(false);
+        self.units(JSON.parse(data));
       }, command, data);
     }
-
 
     self.infoClicked = function(data){
       self.getDeviceInfo(data);
@@ -54,7 +53,11 @@ $(function(){
     }
 
     self.muteClicked= function(data){
-      self.sendCommand("mute", data);
+      if(data.muted){
+        self.sendCommand("muteOff", data);
+      }else{
+        self.sendCommand("muteOn", data);
+      }
     }
 
     self.loadList = function(){
@@ -67,5 +70,6 @@ $(function(){
   }
 
   var vm = new Devices();
+
   ko.applyBindings(vm);
 });

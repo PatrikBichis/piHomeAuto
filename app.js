@@ -74,7 +74,8 @@ app.get('/Sonos/listDevices', sonos.listDevices);
 app.post('/Sonos/play', sonos.play);
 app.post('/Sonos/pause', sonos.pause);
 app.post('/Sonos/stop', sonos.stop);
-app.post('/Sonos/mute', sonos.mute);
+app.post('/Sonos/muteOn', sonos.muteOn);
+app.post('/Sonos/muteOff', sonos.muteOff);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
