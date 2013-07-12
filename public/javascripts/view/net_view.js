@@ -9,9 +9,12 @@ $(function(){
 
     self.loadUnits = function(){
       self.waiting(true);
-      $.get("/Nmap/net", function(data){
+      $.get("/Nmap/LastList", function(data){
         self.units(JSON.parse(data));
-        self.waiting(false);
+        $.get("Nmap/List", function(data){
+          self.units(JSON.parse(data));
+          self.waiting(false);
+        });
       }); 
     }
 

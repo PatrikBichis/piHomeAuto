@@ -66,7 +66,8 @@ app.get('/Control/List', control.list);
 app.post('/Control/SetDevice', control.setDevice);
 
 // Added API for Nmap information
-app.get('/Nmap/net', nmap.list)
+app.get('/Nmap/List', nmap.list)
+app.get('/Nmap/LastList', nmap.lastList)
 
 // Added API for sonos 
 app.post('/Sonos/getSonosDeviceInfo', sonos.getSonosDeviceInfo);

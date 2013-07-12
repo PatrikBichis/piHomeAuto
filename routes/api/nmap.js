@@ -7,6 +7,8 @@ var networkInterfaces = os.networkInterfaces();
 var net = networkInterfaces.eth0[0].address;
 net = net.slice(0, net.lastIndexOf('.')) + '.0/24';
 
+var tempDevices = [];
+
 console.log('my network is: ' + net);
 
 //Now shows name if lookup is possible and mac / ip-address.
@@ -56,8 +58,20 @@ var findActiveHosts = function(callback) {
 	});
 }
 
+exports.lastList = function(req, res){
+	res.json(JSON.stringify(tempDevices));
+}
+
 exports.list = function(req, res) {
 	findActiveHosts(function(data){
+		tempDevices = data; 
 	    res.json(JSON.stringify(data)); 
 	});
 }
+
+// Find all network devices to be able to show them fast to 
+// the view
+findActiveHosts(function(data){
+	console.log("All network devices has been found");
+    tempDevices = data; 
+});
