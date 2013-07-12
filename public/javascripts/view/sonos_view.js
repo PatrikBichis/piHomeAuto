@@ -22,7 +22,7 @@ $(function(){
       self.waiting(true);
 
       self.postData(function(data){
-        //self.units(JSON.parse(data));
+        self.units(JSON.parse(data));
         self.waiting(false);
       }, "getSonosDeviceInfo", data);
     }
@@ -67,9 +67,14 @@ $(function(){
     }
 
     self.loadList();
+
   }
 
   var vm = new Devices();
 
   ko.applyBindings(vm);
+
+  var t = setInterval(function(){
+    vm.loadList();
+  }, 500);
 });
