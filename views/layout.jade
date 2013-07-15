@@ -13,6 +13,7 @@ html
     script(type='text/javascript', src='/javascripts/jquery-1.9.0.min.js');
     script(type='text/javascript', src='/javascripts/knockout-2.1.0.js');
     script(type='text/javascript', src='/javascripts/knockout.mapping-latest.js');
+    script(type='text/javascript', src='/javascripts/sammy-0.7.4.min.js');
     script(type='text/javascript', src='/javascripts/metroui/input-control.js');
     script(type="text/javascript", src="/javascripts/metroui/dropdown.js");
    
@@ -72,7 +73,7 @@ html
         div.page-region
             div.page-region-content
                 div.grid
-                    div.row
+                    div.row(id="content")
                         block content
 
     //div.page

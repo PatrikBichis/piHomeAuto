@@ -12,14 +12,14 @@ block content
           th Plats
           th Status
           th Dim
-      tbody(data-bind="foreach: units")
+      tbody(data-bind="foreach: units") 
         tr
           td
-            p(data-bind="text: name")
+            p(data-bind="text: name") 
           td
             div
               label.input-control.switch
-                input(type="checkbox", data-bind="checked: currentValue, click: $root.deviceClicked" )
+                input(type="checkbox", data-bind="checked: currentValue, click: $root.deviceClicked")
                 span.helper 
           td
             button(data-bind="visible: dimmer, click: $root.deviceDim_0, css: {default: ((currentDimValue == 0) && (currentValue))}") 0%

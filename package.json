@@ -11,9 +11,10 @@
     "less-middleware": "*",
     "request": "*",
     "string": "*",
+    "sonos": "*",
     "piHomeAutoConfig": "https://github.com/x-firm/piHomeAutoConfig/tarball/master",
     "tdtool-js": "https://github.com/x-firm/tdtool-js/tarball/master",
-    "sonos": "https://github.com/bencevans/node-sonos/tarball/master"
+    "nmap-js": "https://github.com/x-firm/nmap-js/tarball/master"
   },
   "devDependencies": {
     "nodemon": "*"

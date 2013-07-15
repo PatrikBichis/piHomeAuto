@@ -82,7 +82,7 @@ $(function(){
       console.log(e);
   })*/
 
-
   var vm = new Devices();
+
   ko.applyBindings(vm);
 });
