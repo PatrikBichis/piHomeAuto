@@ -1,0 +1,17 @@
+block secondery
+  if(noHeader)
+    // No header is selected 
+    div.page-header  
+      div.page-header-content
+  else
+    div.page-header
+      div.page-header-content
+        h1 #{title} 
+            small #{subTitle}
+          a(href="#/").back-button.big.page-back        
+              
+  div.page-region
+    div.page-region-content
+        div.grid
+          div.row
+            block content

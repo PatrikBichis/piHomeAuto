@@ -1,4 +1,4 @@
-extends layout
+extends secondery
 
 block content
   //- h1 piHomeAuto
@@ -25,6 +25,5 @@ block content
             button(data-bind="visible: dimmer, click: $root.deviceDim_0, css: {default: ((currentDimValue == 0) && (currentValue))}") 0%
             button(data-bind="visible: dimmer, click: $root.deviceDim_128, css: {default: ((currentDimValue == 128) && (currentValue))}") 50%
             button(data-bind="visible: dimmer, click: $root.deviceDim_255, css: {default: ((currentDimValue == 255) && (currentValue))}") 100%    
-                 
-  script(type='text/javascript', src='/javascripts/view/units_view.js');
+
               

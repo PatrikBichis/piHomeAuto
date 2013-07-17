@@ -32,7 +32,14 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', function(req, res){
+  res.render('layout', { title: 'piHomeAuto', subTitle: 'Enheter på nätverket', noHeader: true});
+});
+
+app.get('/home', function(req, res){
+  res.render('index', { title: 'piHomeAuto', subTitle: 'Enheter på nätverket', noHeader: true});
+});
+
 app.get('/users', user.list);
 
 app.get('/net', function(req, res){

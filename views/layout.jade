@@ -10,13 +10,14 @@ html
     link(rel='stylesheet', href='/stylesheets/modern.css');
     link(rel='stylesheet', href='/stylesheets/modern-responsive.css');
     link(rel='stylesheet', href='/stylesheets/site.css');
-    script(type='text/javascript', src='/javascripts/jquery-1.9.0.min.js');
-    script(type='text/javascript', src='/javascripts/knockout-2.1.0.js');
-    script(type='text/javascript', src='/javascripts/knockout.mapping-latest.js');
-    script(type='text/javascript', src='/javascripts/sammy-0.7.4.min.js');
-    script(type='text/javascript', src='/javascripts/metroui/input-control.js');
-    script(type="text/javascript", src="/javascripts/metroui/dropdown.js");
-   
+
+    // Libraries
+    script(type='text/javascript', src='/javascripts/Libraries/jquery-1.9.0.min.js');
+    script(type='text/javascript', src='/javascripts/Libraries/knockout-2.1.0.js');
+    script(type='text/javascript', src='/javascripts/Libraries/knockout.mapping-latest.js');
+    script(type='text/javascript', src='/javascripts/Libraries/sammy-0.7.4.min.js');
+    script(type='text/javascript', src='/javascripts/Libraries/metroui/input-control.js');
+    script(type="text/javascript", src="/javascripts/Libraries/metroui/dropdown.js");
     //- script(type="text/javascript", src="/javascripts/metroui/accordion.js")
     //- script(type="text/javascript", src="/javascripts/metroui/buttonset.js")
     //- script(type="text/javascript", src="/javascripts/metroui/carousel.js")
@@ -26,6 +27,16 @@ html
     //- script(type="text/javascript", src="/javascripts/metroui/tile-slider.js")
     //- script(type="text/javascript", src="/javascripts/metroui/tile-drag.js")
     //- script(type="text/javascript", src="/javascripts/metroui/calendar.js")
+
+    // Routes and ViewModels
+    script(type="text/javascript", src="/javascripts/Routes/Router.js");
+
+    script(type="text/javascript", src="/javascripts/ViewModel/index_view.js");
+    script(type="text/javascript", src="/javascripts/ViewModel/units_view.js");
+    script(type="text/javascript", src="/javascripts/ViewModel/groups_view.js");
+    //script(type="text/javascript", src="/javascripts/ViewModel/map_view.js");
+    script(type="text/javascript", src="/javascripts/ViewModel/net_view.js");
+    script(type="text/javascript", src="/javascripts/ViewModel/sonos_view.js");
 
 
   body
@@ -50,31 +61,19 @@ html
                         a(href="#") Meny
                         ul.dropdown-menu
                             li
-                                a(href="/units") Enheter
+                                a(href="#/units") Enheter
                             li
-                                a(href="/groups") Grupper
+                                a(href="#/groups") Grupper
                             li
-                                a(href="/net") Network Map
+                                a(href="#/net") Network Map
+                            li
+                                a(href="#/sonos") Högtalare
                     li
                         a(href="https://github.com/x-firm/piHomeAuto") Source
 
-    div.page.secondary
-        if(noHeader)
-            // No header is selected 
-            div.page-header  
-                div.page-header-content
-        else
-            div.page-header
-                div.page-header-content
-                    h1 #{title} 
-                        small #{subTitle}
-                    a(href="/").back-button.big.page-back        
-                    
-        div.page-region
-            div.page-region-content
-                div.grid
-                    div.row(id="content")
-                        block content
+    div(id="body").page.secondary
+        
+                        
 
     //div.page
     //    div.nav-bar

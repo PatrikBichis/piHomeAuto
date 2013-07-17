@@ -1,4 +1,4 @@
-extends layout
+extends secondery
 
 block content
   //- h1 piHomeAuto
@@ -33,5 +33,4 @@ block content
                 i.icon-stop
               button(data-bind="click: $root.muteClicked")
                 i(data-bind="css: { 'icon-volume-mute': muted == true, 'icon-volume-3': muted == false }")
-
-  script(type='text/javascript', src='/javascripts/view/sonos_view.js');            
+          
