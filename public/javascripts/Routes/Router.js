@@ -1,6 +1,18 @@
 ﻿(function ($) {
     var app = $.sammy('#body', function () {
 
+        this.htmlContainerObject = function(name, html){
+            this.name = name;
+            this.html = html;
+        };
+
+        this.homeHtmlContainer = new this.htmlContainerObject("","");
+        this.netHtmlContainer = new this.htmlContainerObject("","");
+        this.unitsHtmlContainer = new this.htmlContainerObject("","");
+        this.sonosHtmlContainer = new this.htmlContainerObject("","");
+        this.groupsHtmlContainer = new this.htmlContainerObject("","");
+
+
         /***
         * Save current active viewmodel from knockout.
         * Used for enabeling dispose functionality for
@@ -72,41 +84,93 @@
             });
         };
 
+        // Preloading all html file when start file is loaded
+        this.loadHtml = function (context, callback){
+            var context = context;
+            context.app.fetch("/Home", function (content) {
+                context.app.homeHtmlContainer.name = "home";
+                context.app.homeHtmlContainer.html = content;
+
+                context.app.fetch("/net", function (content) {
+                    context.app.netHtmlContainer.name = "net";
+                    context.app.netHtmlContainer.html = content;
+
+                    context.app.fetch("/units", function (content) {
+                        context.app.unitsHtmlContainer.name = "units";
+                        context.app.unitsHtmlContainer.html = content;
+
+                        context.app.fetch("/sonos", function (content) {
+                            context.app.sonosHtmlContainer.name = "sonos";
+                            context.app.sonosHtmlContainer.html = content;
+
+                            context.app.fetch("/groups", function (content) {
+                                context.app.groupsHtmlContainer.name = "groups";
+                                context.app.groupsHtmlContainer.html = content;
+
+                                callback();
+                            });
+                        });
+                    });
+                });
+            });
+        }; 
+
         // 
         // Default route
         this.get('#/', function (context) {
             var context = context;
-            context.app.fetch("/Home", function (content) {
-                context.app.swap(content, null, function () { });
-            });
+            if(context.app.homeHtmlContainer.name != ""){
+                context.app.swap(context.app.homeHtmlContainer.html, null, function () { });
+            }else{
+                context.app.loadHtml(context, function(){
+                    context.app.swap(context.app.homeHtmlContainer.html, null, function () { });
+                });
+            }
         });
 
         this.get('#/units', function (context) {
             var context = context;
-            context.app.fetch("/units", function (content) {
-                context.app.swap(content, new UnitsViewModel(), function () { });
-            });
+            if(context.app.unitsHtmlContainer.name != ""){
+                context.app.swap(context.app.unitsHtmlContainer.html, new UnitsViewModel(), function () { });
+            }else{
+                context.app.loadHtml(context, function(){
+                    context.app.swap(context.app.unitsHtmlContainer.html, new UnitsViewModel(), function () { });
+                });
+            }
         });
+
 
         this.get('#/sonos', function (context) {
             var context = context;
-            context.app.fetch("/sonos", function (content) {
-                context.app.swap(content, new SonosViewModel(), function () { });
-            });
+            if(context.app.sonosHtmlContainer.name != ""){
+                context.app.swap(context.app.sonosHtmlContainer.html, new SonosViewModel(), function () { });
+            }else{
+                context.app.loadHtml(context, function(){
+                    context.app.swap(context.app.sonosHtmlContainer.html, new SonosViewModel(), function () { });
+                });
+            }
         });
 
         this.get('#/net', function (context) {
             var context = context;
-            context.app.fetch("/net", function (content) {
-                context.app.swap(content, new NetViewModel(), function () { });
-            });
+            if(context.app.netHtmlContainer.name != ""){
+                context.app.swap(context.app.netHtmlContainer.html, new NetViewModel(), function () { });
+            }else{
+                context.app.loadHtml(context, function(){
+                    context.app.swap(context.app.netHtmlContainer.html, new NetViewModel(), function () { });
+                });
+            }
         });
 
         this.get('#/groups', function (context) {
             var context = context;
-            context.app.fetch("/groups", function (content) {
-                context.app.swap(content, new GroupsViewModel(), function () { });
-            });
+            if(context.app.groupsHtmlContainer.name != ""){
+                context.app.swap(context.app.groupsHtmlContainer.html, new GroupsViewModel(), function () { });
+            }else{
+                context.app.loadHtml(context, function(){
+                    context.app.swap(context.app.groupsHtmlContainer.html, new GroupsViewModel(), function () { });
+                });
+            }
         });
 
     });
@@ -115,7 +179,10 @@
     * On document ready, start route application.
     */
     $(function () {
+        
+        // Start web app
         app.run('#/');
+
     });
 
 })(jQuery);
