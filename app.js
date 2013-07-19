@@ -66,7 +66,7 @@ app.get('/sonos', function(req, res){
 app.get('/Tellstick/List', tellstick.list);
 app.post('/Tellstick/SetDevice', tellstick.setDevice);
 
-// Added API for groups
+// Added API for groups 
 app.get('/Control/ListGroups', control.listGroups);
 app.post('/Control/SetGroup', control.setGroup);
 app.get('/Control/List', control.list);

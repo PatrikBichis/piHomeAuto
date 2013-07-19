@@ -179,30 +179,10 @@
     * On document ready, start route application.
     */
     $(function () {
-        var preloadImgs = function(callback){
-            var current, image_urls = [ '/images/home.svg', 
-                                        '/images/share.svg', 
-                                        '/images/rss_alt.svg', 
-                                        '/images/camera.svg', 
-                                        '/images/equalizer.svg',
-                                        '/images/metroui/preloader-w8-cycle-black.gif',
-                                        '/images/lightbulb.svg'], i, imgObj = new Image;
-
-            for (i = 0; i < image_urls.length; i += 1) {
-                current = (imgObj.src = image_urls[i]);
-                if (current.complete) { // image is cached/loaded
-                  // do something with the cached/loaded image
-                }
-            }
-
-            callback();
-        };
-
-        preloadImgs(function(){
-            // Start web app
-            app.run('#/');
-        });
         
+        // Start web app
+        app.run('#/');
+
     });
 
 })(jQuery);

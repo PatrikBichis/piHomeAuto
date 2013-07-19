@@ -28,6 +28,14 @@ var GroupsViewModel = function () {
       }); 
   }
 
+  self.groupOff = function(group) { 
+    if(group !== undefined){
+      var data = {units : group.units, value : false};
+      console.log(data);
+      self.sendDeviceValue(data);
+    }
+  }
+
   self.groupOn = function(group) { 
     if(group !== undefined){
       var data = {units : group.units, value : true};
@@ -36,15 +44,13 @@ var GroupsViewModel = function () {
     }
   }
 
-  self.groupOff = function(group) { 
-    if(group !== undefined){
-      var data = {units : group.units, value : false};
-      self.sendDeviceValue(data);
-    }
+  self.temp = function(){
+    
   }
 
   (function () {
-  self.loadGroups();
+    self.loadGroups();
   } (self));
 
 }
+
