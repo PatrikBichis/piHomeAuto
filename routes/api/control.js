@@ -36,6 +36,7 @@ function eachUnitInGroup(callback, group, value, units, length, i){
     getArrayIndexFromElementId(function(id){
       var unit = units[id];
       var id = id;
+
       // Check if an tellstick device
       if (unit.type == 1) {
         
@@ -188,10 +189,15 @@ function readUnits(callback, typesValues, units, length, i){
 function readUnitValues(callback, typesValues, units, i){
   var unit = units[i];
   if(unit.type == 1){
-    var typeValues = typesValues[0];
-
-    unit.currentValue = typeValues[unit.unitId-1].currentValue;
-    unit.currentDimValue = typeValues[unit.unitId-1].currentDimValue;
+    var typeValue = typesValues[0];
+    // Check that typesValue is not null or undefine
+    if(typeValue !== null && typeValue !== 'undefined'){
+        unit.currentValue = typeValue[unit.unitId-1].currentValue;
+        unit.currentDimValue = typeValue[unit.unitId-1].currentDimValue;
+    }else{
+        unit.currentValue = false;
+        unit.currentDimValue = 255;
+    }
     callback();
   }else{
     unit.currentValue = false;

@@ -154,18 +154,28 @@ function getInfoFromDevice(callback, device, devicesInformation){
 	var s = new sonos.Sonos(device.host, device.port)
 	var device = device;
 	var devicesInformation = devicesInformation;
+	var zoneName = "No connection";
+	var muted = false;
 
-	s.getZoneAttrs(function(err, data){
-		var zoneName = data.CurrentZoneName;
-		s.getMuted(function(err, data){
-			var muted = false;
+	if(s !== undefined){
+		s.getZoneAttrs(function(err, data){
+		
+		if(data !== undefined) zoneName = data.CurrentZoneName;
+			s.getMuted(function(err, data){
+				
+				if(data !== undefined) muted = data;
+					
+				devicesInformation.push({name: zoneName, host: device.host, type: device.type, muted: muted}); 
+					
+				callback(devicesInformation);
+			});
+		}, devicesInformation);
+	}else{
 
-			if(data != undefined) muted = data;
-
-			devicesInformation.push({name: zoneName, host: device.host, type: device.type, muted: muted}); 
-			callback(devicesInformation);
-		});
-	}, devicesInformation);
+		devicesInformation.push({name: zoneName, host: device.host, type: device.type, muted: muted}); 
+					
+		callback(devicesInformation);
+	}
 }
 
 function getInfoFromDevices(callback, devices, devicesInformation, length, i){
