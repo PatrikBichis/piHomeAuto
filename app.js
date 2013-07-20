@@ -8,7 +8,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , tellstick = require('./routes/api/tellstick')
-  , control = require('./routes/api/control')
+  //, control = require('./routes/api/control')
   , nmap = require('./routes/api/nmap')
   , sonos = require('./routes/api/sonos')
   , path = require('path');
@@ -67,10 +67,10 @@ app.get('/Tellstick/List', tellstick.list);
 app.post('/Tellstick/SetDevice', tellstick.setDevice);
 
 // Added API for groups 
-app.get('/Control/ListGroups', control.listGroups);
+/*app.get('/Control/ListGroups', control.listGroups);
 app.post('/Control/SetGroup', control.setGroup);
 app.get('/Control/List', control.list);
-app.post('/Control/SetDevice', control.setDevice);
+app.post('/Control/SetDevice', control.setDevice);*/
 
 // Added API for Nmap information
 app.get('/Nmap/List', nmap.list)
