@@ -8,6 +8,7 @@
 
         this.homeHtmlContainer = new this.htmlContainerObject("","");
         this.netHtmlContainer = new this.htmlContainerObject("","");
+        this.mapHtmlContainer = new this.htmlContainerObject("","");
         this.unitsHtmlContainer = new this.htmlContainerObject("","");
         this.sonosHtmlContainer = new this.htmlContainerObject("","");
         this.groupsHtmlContainer = new this.htmlContainerObject("","");
@@ -95,19 +96,24 @@
                     context.app.netHtmlContainer.name = "net";
                     context.app.netHtmlContainer.html = content;
 
-                    context.app.fetch("/units", function (content) {
-                        context.app.unitsHtmlContainer.name = "units";
-                        context.app.unitsHtmlContainer.html = content;
+                    context.app.fetch("/map", function (content) {
+                        context.app.mapHtmlContainer.name = "map";
+                        context.app.mapHtmlContainer.html = content;
 
-                        context.app.fetch("/sonos", function (content) {
-                            context.app.sonosHtmlContainer.name = "sonos";
-                            context.app.sonosHtmlContainer.html = content;
+                        context.app.fetch("/units", function (content) {
+                            context.app.unitsHtmlContainer.name = "units";
+                            context.app.unitsHtmlContainer.html = content;
 
-                            context.app.fetch("/groups", function (content) {
-                                context.app.groupsHtmlContainer.name = "groups";
-                                context.app.groupsHtmlContainer.html = content;
+                            context.app.fetch("/sonos", function (content) {
+                                context.app.sonosHtmlContainer.name = "sonos";
+                                context.app.sonosHtmlContainer.html = content;
 
-                                callback();
+                                context.app.fetch("/groups", function (content) {
+                                    context.app.groupsHtmlContainer.name = "groups";
+                                    context.app.groupsHtmlContainer.html = content;
+
+                                    callback();
+                                });
                             });
                         });
                     });
@@ -139,6 +145,16 @@
             }
         });
 
+        this.get('#/map', function (context) {
+            var context = context;
+            if(context.app.mapHtmlContainer.name != ""){
+                context.app.swap(context.app.mapHtmlContainer.html, new MapViewModel(), function () { });
+            }else{
+                context.app.loadHtml(context, function(){
+                    context.app.swap(context.app.mapHtmlContainer.html, new MapViewModel(), function () { });
+                });
+            }
+        });
 
         this.get('#/sonos', function (context) {
             var context = context;
