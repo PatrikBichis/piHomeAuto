@@ -10,6 +10,7 @@ var express = require('express')
   , tellstick = require('./routes/api/tellstick')
   , control = require('./routes/api/control')
   , nmap = require('./routes/api/nmap')
+  , pitemp = require('./routes/api/pitemp')
   , sonos = require('./routes/api/sonos')
   , path = require('path');
 
@@ -62,6 +63,10 @@ app.get('/sonos', function(req, res){
   res.render('sonos', { title: 'piHomeAuto', subTitle: 'Sonos enheter' });
 })
 
+app.get('/temps', function(req, res){
+  res.render('temps', { title: 'piHomeAuto', subTitle: 'Temperaturer' });
+})
+
 // Added API for tellstick
 app.get('/Tellstick/List', tellstick.list);
 app.post('/Tellstick/SetDevice', tellstick.setDevice);
@@ -75,6 +80,9 @@ app.post('/Control/SetDevice', control.setDevice);
 // Added API for Nmap information
 app.get('/Nmap/List', nmap.list)
 app.get('/Nmap/LastList', nmap.lastList)
+
+// Added API for getting temperatures
+app.get('/pitemp', pitemp.loadTemps)
 
 // Added API for sonos 
 app.post('/Sonos/getSonosDeviceInfo', sonos.getSonosDeviceInfo);

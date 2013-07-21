@@ -12,6 +12,7 @@
         this.unitsHtmlContainer = new this.htmlContainerObject("","");
         this.sonosHtmlContainer = new this.htmlContainerObject("","");
         this.groupsHtmlContainer = new this.htmlContainerObject("","");
+        this.tempsHtmlContainer = new this.htmlContainerObject("","");
 
 
         /***
@@ -112,7 +113,13 @@
                                     context.app.groupsHtmlContainer.name = "groups";
                                     context.app.groupsHtmlContainer.html = content;
 
+                                    context.app.fetch("/temps", function (content) {
+                                        context.app.tempsHtmlContainer.name = "temps";
+                                        context.app.tempsHtmlContainer.html = content;
+
+
                                     callback();
+                                    });
                                 });
                             });
                         });
@@ -185,6 +192,17 @@
             }else{
                 context.app.loadHtml(context, function(){
                     context.app.swap(context.app.groupsHtmlContainer.html, new GroupsViewModel(), function () { });
+                });
+            }
+        });
+
+        this.get('#/temps', function (context) {
+            var context = context;
+            if(context.app.tempsHtmlContainer.name != ""){
+                context.app.swap(context.app.tempsHtmlContainer.html, new TempsViewModel(), function () { });
+            }else{
+                context.app.loadHtml(context, function(){
+                    context.app.swap(context.app.tempsHtmlContainer.html, new TempsViewModel(), function () { });
                 });
             }
         });
