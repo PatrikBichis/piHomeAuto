@@ -4,6 +4,24 @@ var ctx = can.getContext('2d');
 var imgx = 550;
 var imgy = 100;
 
+//Get devices, will be feteched from mongoDB or config
+var devices = [
+  {
+    "name":"1",
+    "x":550,
+    "y":100
+  },
+  {
+    "name":"2",
+    "x":400,
+    "y":150
+  },
+  {
+    "name":"3",
+    "x":350,
+    "y":200
+  }];
+
 var editActive = false;
 
 //Vars to locate mouse and where to save
@@ -24,7 +42,9 @@ function init() {
   ctx.clearRect(0, 0, canvas1.width, canvas1.height);
   img.onload = function() {
       ctx.drawImage(img, 0, 0);
-      ctx.drawImage(img2, imgx, imgy);
+      for (dev in devices) {
+        ctx.drawImage(img2, devices[dev].x, devices[dev].y);
+      }
   }
   img2.onload = function() {
   	img2_h = this.width;
@@ -36,37 +56,43 @@ function init() {
 
 canvas1.addEventListener("mousedown", getPosition, false);
 
-function getPosition(event)
-{
+function getPosition(event) {
   
-  var x = event.x;
-  var y = event.y;
+  var mouse_x = event.x;
+  var mouse_y = event.y;
 
   var canvas = document.getElementById("canvas1");
 
-  x -= canvas.offsetLeft;
-  y -= canvas.offsetTop;
+  mouse_x -= canvas.offsetLeft;
+  mouse_y -= canvas.offsetTop;
 
-if (editActive == false) {
+  if (editActive == false) {
     // needs -150 subtracted on y axis , 0 seems to start outside the canvas..
-    console.log('you clicked at: ' + x + ' : ' + (y-150));
-    if (x >= imgx && x <= imgx+img2_w) {
-    	if ((y-150) >= imgy && (y-150) <= imgy+img2_h) {
-    		console.log('lamp clicked!');
-    		lampFunc();
-    	}
-    }
+    console.log('you clicked at: ' + mouse_x + ' : ' + (mouse_y-150));
+    searchPosition(mouse_x, mouse_y);
   }
   if (editActive == true) {
     ctx.clearRect(0, 0, canvas1.width, canvas1.height);
     ctx.drawImage(img, 0, 0);
     // needs -150 subtracted on y axis , 0 seems to start outside the canvas..
-    ctx.drawImage(img2, x-(img2_w/2), (y-(img2_h/2)-150));
-    savePos(x-(img2_w/2), (y-(img2_h/2)-150));
+    //ctx.drawImage(img2, mouse_x-(img2_w/2), (mouse_y-(img2_h/2)-150));
+    //savePos(mouse_x-(img2_w/2), (mouse_y-(img2_h/2)-150));
   }
 }
-function lampFunc() {
-	location.href = '/';
+
+function searchPosition(x,y) {
+  for(dev in devices) {
+    if (x >= devices[dev].x && x <= devices[dev].x+img2_w) {
+      if ((y-150) >= devices[dev].y && (y-150) <= devices[dev].y+img2_h) {
+        console.log('lamp ' + devices[dev].name +  ' clicked!');
+        lampFunc(devices[dev].name);
+      }
+    }
+  }
+}
+
+function lampFunc(dev) {
+	window.alert('You clicked lamp # ' + dev);
 }
 
 function editMode() {
