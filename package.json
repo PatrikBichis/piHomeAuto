@@ -14,7 +14,8 @@
     "sonos": "*",
     "piHomeAutoConfig": "https://github.com/x-firm/piHomeAutoConfig/tarball/master",
     "tdtool-js": "https://github.com/x-firm/tdtool-js/tarball/master",
-    "nmap-js": "https://github.com/x-firm/nmap-js/tarball/master"
+    "nmap-js": "https://github.com/x-firm/nmap-js/tarball/master",
+    "suncalc": "*"
   },
   "devDependencies": {
     "nodemon": "*"

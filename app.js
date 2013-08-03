@@ -12,7 +12,8 @@ var express = require('express')
   , nmap = require('./routes/api/nmap')
   , pitemp = require('./routes/api/pitemp')
   , sonos = require('./routes/api/sonos')
-  , path = require('path');
+  , path = require('path')
+  , dawndusk = require('./routes/api/sun.js');
 
 var app = express();
 
