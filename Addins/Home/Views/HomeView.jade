@@ -1,0 +1,20 @@
+extends secondery
+
+block content
+
+  each tileData in tilesData
+    a(href="#{tileData.route}")
+      div.tile.icon.bg-color-blue
+        div.tile-content
+            img(src="/images/#{tileData.icon}")
+        div.brand
+          span.name #{tileData.header}
+
+  a(href="#")        
+    div.tile.icon.bg-color-blue
+      div.tile-content
+          img(src="/images/camera.svg")
+      div.brand
+        span.name Kameror
+
+

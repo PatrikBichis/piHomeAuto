@@ -1,0 +1,19 @@
+extends secondery
+
+block content
+  //- h1 piHomeAuto
+  //- br
+  //- h4 Temperaturer
+  img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
+  div.span8
+    table.striped
+      thead
+        tr 
+          th Enhet
+          th Temperatur
+      tbody(data-bind="foreach: pitemp")
+        tr
+          td
+            p(data-bind="text: dev")
+          td
+            p(data-bind="text: value")
