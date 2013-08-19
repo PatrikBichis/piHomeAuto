@@ -1,4 +1,4 @@
-var GroupsViewModel = function () {
+var GroupsListViewModel  = function () {
   var self = this;
 
   self.groups = ko.observableArray([]);
@@ -53,4 +53,3 @@ var GroupsViewModel = function () {
   } (self));
 
 }
-

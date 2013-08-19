@@ -1,4 +1,4 @@
-var SonosViewModel = function () {
+var SonosListViewModel = function () {
   var self = this;
 
   self.units = ko.observableArray([]);

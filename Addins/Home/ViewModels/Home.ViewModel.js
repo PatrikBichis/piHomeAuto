@@ -1,4 +1,3 @@
-﻿
 $(function () {
     var app = new ApplicationViewModel();
     ko.applyBindings(app);

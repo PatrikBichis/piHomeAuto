@@ -4,15 +4,10 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
-  , tellstick = require('./routes/api/tellstick')
-  , control = require('./routes/api/control')
-  , nmap = require('./routes/api/nmap')
-  , pitemp = require('./routes/api/pitemp')
-  , sonos = require('./routes/api/sonos')
   , path = require('path')
+  , addin = require("./Addin.Core").Core()
+  , pitemp = require('./routes/api/pitemp')
   , dawndusk = require('./routes/api/sun.js');
 
 var app = express();
@@ -34,66 +29,20 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', function(req, res){
-  res.render('layout', { title: 'piHomeAuto', subTitle: 'Enheter på nätverket', noHeader: true});
-});
-
-app.get('/home', function(req, res){
-  res.render('index', { title: 'piHomeAuto', subTitle: 'Enheter på nätverket', noHeader: true});
-});
-
-app.get('/users', user.list);
-
-app.get('/net', function(req, res){
-	res.render('net', { title: 'piHomeAuto', subTitle: 'Enheter på nätverket' });
-})
-
 app.get('/map', function(req, res){
   res.render('map', { title: 'piHomeAuto', subTitle: 'Karta' });
-})
-
-app.get('/units', function(req, res){
-  res.render('units', { title: 'piHomeAuto', subTitle: 'Enheter' });
-})
-
-app.get('/groups', function(req, res){
-	res.render('groups', { title: 'piHomeAuto', subTitle: 'Grupper' });
-})
-
-app.get('/sonos', function(req, res){
-  res.render('sonos', { title: 'piHomeAuto', subTitle: 'Sonos enheter' });
 })
 
 app.get('/temps', function(req, res){
   res.render('temps', { title: 'piHomeAuto', subTitle: 'Temperaturer' });
 })
 
-// Added API for tellstick
-app.get('/Tellstick/List', tellstick.list);
-app.post('/Tellstick/SetDevice', tellstick.setDevice);
-
-// Added API for groups 
-app.get('/Control/ListGroups', control.listGroups);
-app.post('/Control/SetGroup', control.setGroup);
-app.get('/Control/List', control.list);
-app.post('/Control/SetDevice', control.setDevice);
-
-// Added API for Nmap information
-app.get('/Nmap/List', nmap.list)
-app.get('/Nmap/LastList', nmap.lastList)
-
 // Added API for getting temperatures
 app.get('/pitemp', pitemp.loadTemps)
 
-// Added API for sonos 
-app.post('/Sonos/getSonosDeviceInfo', sonos.getSonosDeviceInfo);
-app.get('/Sonos/listDevices', sonos.listDevices);
-app.post('/Sonos/play', sonos.play);
-app.post('/Sonos/pause', sonos.pause);
-app.post('/Sonos/stop', sonos.stop);
-app.post('/Sonos/muteOn', sonos.muteOn);
-app.post('/Sonos/muteOff', sonos.muteOff);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+addin.installAddins(app, function(){
+  http.createServer(app).listen(app.get('port'), function(){
+    console.log('Express server listening on port ' + app.get('port'));
+  });
 });

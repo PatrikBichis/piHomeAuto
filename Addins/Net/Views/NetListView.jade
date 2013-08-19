@@ -1,0 +1,24 @@
+extends secondery
+
+block content
+  //- h1 piHomeAuto
+  //- br
+  //- h4 Enheter på nätverket
+  img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
+  div.span8
+    table.striped
+      thead
+        tr
+          th Namn 
+          th Ip-adress
+          th Mac-adress
+      tbody(data-bind="foreach: units")
+        tr
+          td
+            p(data-bind="text: name")
+          td 
+            p(data-bind="text: ip")
+          td 
+            p(data-bind="text: mac")
+  
+

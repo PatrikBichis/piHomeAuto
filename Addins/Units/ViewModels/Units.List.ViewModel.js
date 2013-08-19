@@ -1,4 +1,4 @@
-var UnitsViewModel = function () {
+var UnitsListViewModel = function () {
   var self = this;
 
   self.units = ko.observableArray([]);
@@ -7,7 +7,7 @@ var UnitsViewModel = function () {
 
   self.loadUnits = function(){
     self.waiting(true);
-    $.get("/Control/list", function(data){
+    $.get("/Units/List", function(data){
       self.units(JSON.parse(data));
       self.waiting(false);
     }); 
@@ -17,7 +17,7 @@ var UnitsViewModel = function () {
     self.waiting(true);
     $.ajax({
           type: "POST",
-          url: "/Control/SetDevice", // your POST target goes here
+          url: "/Units/SetUnit", // your POST target goes here
           dataType: 'json',
           contentType: 'application/json',
           data: JSON.stringify(data), // message to send goes here

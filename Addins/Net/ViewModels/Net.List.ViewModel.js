@@ -1,11 +1,11 @@
-var NetViewModel = function () {
+var NetListViewModel = function () {
   var self = this;
 
   self.loadNet = function(){
     self.waiting(true);
-    $.get("/Nmap/LastList", function(data){
+    $.get("/Net/LastList", function(data){
       self.units(JSON.parse(data));
-      $.get("Nmap/List", function(data){
+      $.get("Net/List", function(data){
         self.units(JSON.parse(data));
         self.waiting(false);
       });
@@ -20,4 +20,3 @@ var NetViewModel = function () {
     self.loadNet();
   } (self));
 }
-

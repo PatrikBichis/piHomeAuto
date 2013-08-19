@@ -1,0 +1,29 @@
+extends secondery
+
+block content
+  //- h1 piHomeAuto
+  //- br
+  //- h4 Enheter på nätverket
+  img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
+  div.span6
+    table.striped
+      thead
+        tr
+          th Id
+          th Beskrivning
+          th On
+          th Off
+      tbody(data-bind="foreach: groups")
+        tr
+          td
+            p(data-bind="text: id")
+          td 
+            p(data-bind="text: name")
+          td
+            button(data-bind="click: $root.groupOn").default On
+          td
+            button(data-bind="click: $root.groupOff") Off
+
+
+
+

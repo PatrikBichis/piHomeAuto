@@ -5,16 +5,7 @@
             this.name = name;
             this.html = html;
         };
-
-        this.homeHtmlContainer = new this.htmlContainerObject("","");
-        this.netHtmlContainer = new this.htmlContainerObject("","");
-        this.mapHtmlContainer = new this.htmlContainerObject("","");
-        this.unitsHtmlContainer = new this.htmlContainerObject("","");
-        this.sonosHtmlContainer = new this.htmlContainerObject("","");
-        this.groupsHtmlContainer = new this.htmlContainerObject("","");
-        this.tempsHtmlContainer = new this.htmlContainerObject("","");
-
-
+        
         /***
         * Save current active viewmodel from knockout.
         * Used for enabeling dispose functionality for
@@ -78,165 +69,50 @@
                 success: function (content) {
                     if (callback != null) {
                         callback(content);
+                    }else{
+                         console.log("content was null");
                     }
                 },
                 error: function (err) {
                     // TODO redirect to sammy error route
+                    console.log(err);
                 }
             });
         };
 
-        // Preloading all html file when start file is loaded
-        this.loadHtml = function (context, callback){
-            var context = context;
-            context.app.fetch("/Home", function (content) {
-                context.app.homeHtmlContainer.name = "home";
-                context.app.homeHtmlContainer.html = content;
+        /***
+        * On document ready, start route application.
+        */
+        $(function () {
 
-                context.app.fetch("/net", function (content) {
-                    context.app.netHtmlContainer.name = "net";
-                    context.app.netHtmlContainer.html = content;
+            var preloadImgs = function(callback, data){
+                var current, image_urls = data, i, imgObj = new Image;
 
-                    context.app.fetch("/map", function (content) {
-                        context.app.mapHtmlContainer.name = "map";
-                        context.app.mapHtmlContainer.html = content;
-
-                        context.app.fetch("/units", function (content) {
-                            context.app.unitsHtmlContainer.name = "units";
-                            context.app.unitsHtmlContainer.html = content;
-
-                            context.app.fetch("/sonos", function (content) {
-                                context.app.sonosHtmlContainer.name = "sonos";
-                                context.app.sonosHtmlContainer.html = content;
-
-                                context.app.fetch("/groups", function (content) {
-                                    context.app.groupsHtmlContainer.name = "groups";
-                                    context.app.groupsHtmlContainer.html = content;
-
-                                    context.app.fetch("/temps", function (content) {
-                                        context.app.tempsHtmlContainer.name = "temps";
-                                        context.app.tempsHtmlContainer.html = content;
-
-
-                                    callback();
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
-            });
-        }; 
-
-        // 
-        // Default route
-        this.get('#/', function (context) {
-            var context = context;
-            if(context.app.homeHtmlContainer.name != ""){
-                context.app.swap(context.app.homeHtmlContainer.html, null, function () { });
-            }else{
-                context.app.loadHtml(context, function(){
-                    context.app.swap(context.app.homeHtmlContainer.html, null, function () { });
-                });
-            }
-        });
-
-        this.get('#/units', function (context) {
-            var context = context;
-            if(context.app.unitsHtmlContainer.name != ""){
-                context.app.swap(context.app.unitsHtmlContainer.html, new UnitsViewModel(), function () { });
-            }else{
-                context.app.loadHtml(context, function(){
-                    context.app.swap(context.app.unitsHtmlContainer.html, new UnitsViewModel(), function () { });
-                });
-            }
-        });
-
-        this.get('#/map', function (context) {
-            var context = context;
-            if(context.app.mapHtmlContainer.name != ""){
-                context.app.swap(context.app.mapHtmlContainer.html, new MapViewModel(), function () { });
-            }else{
-                context.app.loadHtml(context, function(){
-                    context.app.swap(context.app.mapHtmlContainer.html, new MapViewModel(), function () { });
-                });
-            }
-        });
-
-        this.get('#/sonos', function (context) {
-            var context = context;
-            if(context.app.sonosHtmlContainer.name != ""){
-                context.app.swap(context.app.sonosHtmlContainer.html, new SonosViewModel(), function () { });
-            }else{
-                context.app.loadHtml(context, function(){
-                    context.app.swap(context.app.sonosHtmlContainer.html, new SonosViewModel(), function () { });
-                });
-            }
-        });
-
-        this.get('#/net', function (context) {
-            var context = context;
-            if(context.app.netHtmlContainer.name != ""){
-                context.app.swap(context.app.netHtmlContainer.html, new NetViewModel(), function () { });
-            }else{
-                context.app.loadHtml(context, function(){
-                    context.app.swap(context.app.netHtmlContainer.html, new NetViewModel(), function () { });
-                });
-            }
-        });
-
-        this.get('#/groups', function (context) {
-            var context = context;
-            if(context.app.groupsHtmlContainer.name != ""){
-                context.app.swap(context.app.groupsHtmlContainer.html, new GroupsViewModel(), function () { });
-            }else{
-                context.app.loadHtml(context, function(){
-                    context.app.swap(context.app.groupsHtmlContainer.html, new GroupsViewModel(), function () { });
-                });
-            }
-        });
-
-        this.get('#/temps', function (context) {
-            var context = context;
-            if(context.app.tempsHtmlContainer.name != ""){
-                context.app.swap(context.app.tempsHtmlContainer.html, new TempsViewModel(), function () { });
-            }else{
-                context.app.loadHtml(context, function(){
-                    context.app.swap(context.app.tempsHtmlContainer.html, new TempsViewModel(), function () { });
-                });
-            }
-        });
-
-    });
-
-    /***
-    * On document ready, start route application.
-    */
-    $(function () {
-        var preloadImgs = function(callback){
-            var current, image_urls = [ '/images/home.svg', 
-                                        '/images/share.svg', 
-                                        '/images/rss_alt.svg', 
-                                        '/images/camera.svg', 
-                                        '/images/equalizer.svg',
-                                        '/images/metroui/preloader-w8-cycle-black.gif',
-                                        '/images/lightbulb.svg'], i, imgObj = new Image;
-
-            for (i = 0; i < image_urls.length; i += 1) {
-                current = (imgObj.src = image_urls[i]);
-                if (current.complete) { // image is cached/loaded
-                  // do something with the cached/loaded image
+                for (i = 0; i < image_urls.length; i += 1) {
+                    current = (imgObj.src = "/images/" + image_urls[i]);
+                    if (current.complete) { // image is cached/loaded
+                      // do something with the cached/loaded image
+                    }
                 }
-            }
 
-            callback();
-        };
+                callback();
+            };
 
-        preloadImgs(function(){
-            // Start web app
-            app.run('#/');
+            // Preloading alla images in the application
+            $.get("/Addins/GetImages", function(data) {
+                if(data !== undefined){
+                    if(data.length > 0){
+                        preloadImgs(function(){
+                            // Start web app
+                            app.run('#/');
+                        }, JSON.parse(data));
+                    }
+                }
+            });
+            
         });
         
+
     });
 
 })(jQuery);
