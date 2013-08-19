@@ -15,36 +15,31 @@ function Core () {
   this.viewModelsFiles = [];
   this.views = [];
   this.routes = [];
-<<<<<<< HEAD
   this.tiles = [];
-=======
->>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
+
 
   this.scanForAddins = function(callback, app){
-  	var p = "./Addins/"
-  	fs.readdir(p, function (err, files) {
-  	    if (err) {
-  	        throw err;
-  	    }
+    var p = "./Addins/"
+    fs.readdir(p, function (err, files) {
+        if (err) {
+            throw err;
+        }
 
-  	    readAddinConfig(function(){
-  	    	callback(addins);
-  	    }, app, files, files.length, 0);
+        readAddinConfig(function(){
+          callback(addins);
+        }, app, files, files.length, 0);
 
-  	});
+    });
   }
 
   this.getAddins = function(){
     return addins;
   }
 
-<<<<<<< HEAD
   this.getTiles = function(){
     return _.uniq(tiles);
   }
 
-=======
->>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
   this.getImages = function(){
     return _.uniq(images);
   }
@@ -72,13 +67,10 @@ function Core () {
   this.copyFileSync = function(srcFile, destFile, encoding) {
     // TODO: Add errorhandling if file is not found or 
     // if not posible to save file
-<<<<<<< HEAD
+
     var content = fs.readFileSync(srcFile);
     fs.writeFileSync(destFile, content);
-=======
-    var content = fs.readFileSync(srcFile, encoding);
-    fs.writeFileSync(destFile, content, encoding);
->>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
+
   }
 
   this.getPageFromPages = function(pages, name){
@@ -217,11 +209,8 @@ function Core () {
       '\t\t});\n';
       appendText(fileSammy, sammyRoute, "utf8");
 
-<<<<<<< HEAD
       appendText(file, '\tapp.get("'+page.viewRoute+'", function(req, res){\n\t\tres.render("'+page.view+'", { title: "'+page.header+'", subTitle: "'+page.description+'", tilesData: addin.getTiles(), viewModelFiles: addin.getViewModelFiles(), routesFiles: addin.getRoutesFiles(), noHeader: '+page.noHeader+'});\n\t\t})\n', "utf8");
-=======
-      appendText(file, '\tapp.get("'+page.viewRoute+'", function(req, res){\n\t\tres.render("'+page.view+'", { title: "'+page.header+'", subTitle: "'+page.description+'", viewModelFiles: addin.getViewModelFiles(), routesFiles: addin.getRoutesFiles(), noHeader: '+page.noHeader+'});\n\t\t})\n', "utf8");
->>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
+
     };
 
     // add api routes
@@ -255,12 +244,9 @@ function Core () {
 
     if( i < length ) {
       var image = array[i];
-  	  images.push(image);
-<<<<<<< HEAD
+      images.push(image);
+
       copyFileSync(path.resolve(process.cwd(), "Addins", addin.name, "Images", array[i]), path.resolve(process.cwd(), "public", "images", array[i]), "utf8");
-=======
-      copyFileSync("./Addins/"+addin.name+"/Images/"+array[i], "./public/images/"+array[i], "utf8");
->>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
 
       getImagesFromAddin(callback, addin, array, length, i + 1 );
     }else{
@@ -277,16 +263,12 @@ function Core () {
     if( i < length ) {
       var page = array[i];
       pages.push(page);
-<<<<<<< HEAD
       var temp = array[i].viewModelFiles;
-=======
-      var viewModelFile = array[i].viewModelFile;
->>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
+
       var view = array[i].view;
     
       if(view != ""){
         views.push(view);
-<<<<<<< HEAD
         copyFileSync(path.resolve(process.cwd(), "Addins", addin.name, "Views", view), path.resolve(process.cwd(), "views", view), "utf8");
       }
       if(temp.length > 0){
@@ -304,13 +286,6 @@ function Core () {
       // Check i pages should haw an tile
       if(array[i].addAsTiles){
         tiles.push({header: array[i].header, icon: array[i].tilesIcon, route: array[i].route})
-=======
-        copyFileSync("./Addins/"+addin.name+"/Views/"+view, "./views/"+view, "utf8");
-      }
-      if(viewModelFile != ""){
-        viewModelsFiles.push(viewModelFile);
-        copyFileSync("./Addins/"+addin.name+"/ViewModels/"+viewModelFile, "./public/javascripts/ViewModel/"+viewModelFile, "utf8");
->>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
       }
 
       getPagesFromAddin(callback, addin, array, length, i + 1 );

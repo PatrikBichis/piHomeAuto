@@ -1,10 +1,4 @@
-$(function () {
-    var app = new ApplicationViewModel();
-    ko.applyBindings(app);
-});
-
-
-var ApplicationViewModel = function () {
+var HomeViewModel = function () {
 
     (function () {
 

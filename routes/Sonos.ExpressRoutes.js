@@ -13,11 +13,7 @@ exports.initAddin = function(app, addin){
 	var app = app;
 
 	app.get("/Sonos", function(req, res){
-<<<<<<< HEAD
 		res.render("SonosListView.jade", { title: "Sonos", subTitle: "Shows all sonos speakers on the network", tilesData: addin.getTiles(), viewModelFiles: addin.getViewModelFiles(), routesFiles: addin.getRoutesFiles(), noHeader: false});
-=======
-		res.render("SonosListView.jade", { title: "Sonos", subTitle: "Shows all sonos speakers on the network", viewModelFiles: addin.getViewModelFiles(), routesFiles: addin.getRoutesFiles(), noHeader: false});
->>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
 		})
 	// Api routes
 	app.get("/Sonos/listDevices", SonosController.listDevices);

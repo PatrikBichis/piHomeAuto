@@ -84,7 +84,6 @@
         * On document ready, start route application.
         */
         $(function () {
-<<<<<<< HEAD
 
             var preloadImgs = function(callback, data){
                 var current, image_urls = data, i, imgObj = new Image;
@@ -128,38 +127,6 @@ var ApplicationViewModel = function () {
 
 
     (function () {
-=======
-
-            var preloadImgs = function(callback, data){
-                var current, image_urls = data, i, imgObj = new Image;
-
-                for (i = 0; i < image_urls.length; i += 1) {
-                    current = (imgObj.src = "/images/" + image_urls[i]);
-                    if (current.complete) { // image is cached/loaded
-                      // do something with the cached/loaded image
-                    }
-                }
-
-                callback();
-            };
-
-            // Preloading alla images in the application
-            $.get("/Addins/GetImages", function(data) {
-                if(data !== undefined){
-                    if(data.length > 0){
-                        preloadImgs(function(){
-                            // Start web app
-                            app.run('#/');
-                        }, JSON.parse(data));
-                    }
-                }
-            });
-            
-        });
-        
-
-    });
->>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
 
     } (self));
 }
