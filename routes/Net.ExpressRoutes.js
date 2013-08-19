@@ -13,7 +13,11 @@ exports.initAddin = function(app, addin){
 	var app = app;
 
 	app.get("/Net", function(req, res){
+<<<<<<< HEAD
 		res.render("NetListView.jade", { title: "Network", subTitle: "Shows all units on the network", tilesData: addin.getTiles(), viewModelFiles: addin.getViewModelFiles(), routesFiles: addin.getRoutesFiles(), noHeader: false});
+=======
+		res.render("NetListView.jade", { title: "Network", subTitle: "Shows all units on the network", viewModelFiles: addin.getViewModelFiles(), routesFiles: addin.getRoutesFiles(), noHeader: false});
+>>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
 		})
 	// Api routes
 	app.get("/Net/List", NetController.list);

@@ -1,0 +1,87 @@
+doctype 5
+html
+  head
+    title= title
+    //link(rel='stylesheet', href='/stylesheets/style.css')
+    //link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+    link(rel='stylesheet', href='/stylesheets/modern.css');
+    link(rel='stylesheet', href='/stylesheets/modern-responsive.css');
+    link(rel='stylesheet', href='/stylesheets/site.css');
+
+    // Libraries
+    script(type='text/javascript', src='/javascripts/Libraries/jquery-1.9.0.min.js');
+    script(type='text/javascript', src='/javascripts/Libraries/knockout-2.1.0.js');
+    script(type='text/javascript', src='/javascripts/Libraries/knockout.mapping-latest.js');
+    script(type='text/javascript', src='/javascripts/Libraries/sammy-0.7.4.min.js');
+    script(type='text/javascript', src='/javascripts/Libraries/metroui/input-control.js');
+    script(type="text/javascript", src="/javascripts/Libraries/metroui/dropdown.js");
+    //- script(type="text/javascript", src="/javascripts/metroui/accordion.js")
+    //- script(type="text/javascript", src="/javascripts/metroui/buttonset.js")
+    //- script(type="text/javascript", src="/javascripts/metroui/carousel.js")
+    //- script(type="text/javascript", src="/javascripts/metroui/pagecontrol.js")
+    //- script(type="text/javascript", src="/javascripts/metroui/rating.js")
+    //- script(type="text/javascript", src="/javascripts/metroui/slider.js");
+    //- script(type="text/javascript", src="/javascripts/metroui/tile-slider.js")
+    //- script(type="text/javascript", src="/javascripts/metroui/tile-drag.js")
+    //- script(type="text/javascript", src="/javascripts/metroui/calendar.js")
+
+    // Add Libraries
+    //-each viewModel in viewModelFiles
+    //-    script(type="text/javascript", src="/javascripts/ViewModel/#{viewModel}");
+
+    // Routes engine
+    script(type="text/javascript", src="/javascripts/Routes/Router.js");
+    each route in routesFiles
+        script(type="text/javascript", src="/javascripts/Routes/#{route}");
+
+    // Add ViewModels
+    each viewModel in viewModelFiles
+        script(type="text/javascript", src="/javascripts/ViewModel/#{viewModel}");
+
+
+
+
+  body
+
+    div.page
+        div.nav-bar
+            div.nav-bar-inner.padding10
+                span.pull-menu
+
+                a(href="/")
+                    span.element.brand
+                        //-img(src="images/logo32.png", style="height: 20px").place-left
+                        p piHomeAuto 
+                            small 0.0.1
+
+                div.divider
+
+                ul.menu
+                    li
+                        a(href="#/") Start
+                    li(data-role="dropdown")
+                        a(href="#") Meny
+                        ul.dropdown-menu
+                            li
+                                a(href="#/units") Enheter
+                            li
+                                a(href="#/groups") Grupper
+                            li
+                                a(href="#/net") Network Map
+                            li
+                                a(href="#/sonos") Högtalare
+                    li
+                        a(href="https://github.com/x-firm/piHomeAuto") Source
+
+    div(id="body").page.secondary
+        h1 Application is loading please wait...
+
+    //div.page
+    //    div.nav-bar
+    //        div.nav-bar-inner.padding10
+    //            span.element 2012-2013, piHomAuto &copy; 
+
+                

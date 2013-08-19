@@ -6,8 +6,12 @@ var config = function(){
 	self.description = "Turn on and off groups";
 
 	self.images = [
+<<<<<<< HEAD
 	            'preloader-w8-cycle-black.gif',
 	            'share.svg'
+=======
+	            'preloader-w8-cycle-black.gif'
+>>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
             ];
 
 	self.pages = [
@@ -15,12 +19,19 @@ var config = function(){
 			name: "ListGroups",
 			header: "Groups",
 			noHeader: false,
+<<<<<<< HEAD
 			addAsTiles: true,
 			tilesIcon: 'share.svg',
 			description: "Shows all groups and it's possible to turn them on/off",
 			route: "#/Groups",
 			viewModel: "new GroupsListViewModel()",
 			viewModelFiles: ["Groups.List.ViewModel.js"],
+=======
+			description: "Shows all groups and it's possible to turn them on/off",
+			route: "#/Groups",
+			viewModel: "new GroupsListViewModel()",
+			viewModelFile: "Groups.List.ViewModel.js",
+>>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
 			view: "GroupsListView.jade",
 			viewRoute: "/Groups"
 		}

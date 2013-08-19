@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var HomeViewModel = function () {
   var self = this;
 
@@ -37,3 +38,17 @@ var HomeViewModel = function () {
   } (self));
 }
 
+=======
+$(function () {
+    var app = new ApplicationViewModel();
+    ko.applyBindings(app);
+});
+
+
+var ApplicationViewModel = function () {
+
+    (function () {
+
+    } (self));
+}
+>>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73

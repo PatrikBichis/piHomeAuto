@@ -13,7 +13,11 @@ exports.initAddin = function(app, addin){
 	var app = app;
 
 	app.get("/Groups", function(req, res){
+<<<<<<< HEAD
 		res.render("GroupsListView.jade", { title: "Groups", subTitle: "Shows all groups and it's possible to turn them on/off", tilesData: addin.getTiles(), viewModelFiles: addin.getViewModelFiles(), routesFiles: addin.getRoutesFiles(), noHeader: false});
+=======
+		res.render("GroupsListView.jade", { title: "Groups", subTitle: "Shows all groups and it's possible to turn them on/off", viewModelFiles: addin.getViewModelFiles(), routesFiles: addin.getRoutesFiles(), noHeader: false});
+>>>>>>> a76a6615f40eb3f2239f136a46f3e47bb8aa5f73
 		})
 	// Api routes
 	app.get("/Control/ListGroups", GroupsController.listGroups);
