@@ -1,0 +1,31 @@
+div.span6
+  table.striped
+    thead
+      tr 
+        th Plats
+        th Status
+    tbody(data-bind="foreach: units") 
+      tr
+        td
+          p(data-bind="text: name") 
+        td
+          div
+            label.input-control.switch
+              input(type="checkbox", data-bind="checked: currentValue, click: $root.deviceClicked")
+              span.helper
+div.span4
+  table.striped
+    thead
+      tr 
+        th Beskrivning
+        th On
+        th Off
+    tbody(data-bind="foreach: groups")
+      tr
+        td 
+          p(data-bind="text: name")
+        td
+          button(data-bind="click: $root.groupOn").default On
+        td
+          button(data-bind="click: $root.groupOff") Off
+              

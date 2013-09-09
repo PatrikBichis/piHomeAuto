@@ -1,4 +1,5 @@
 var suncalc = require('suncalc')
+var homeInfo = require('piHomeAutoConfig').piHomeAutoConfig().homeInfo;
 /*
 Function that callbacks a JSON Object with
 todays sunset/sundown for specified coordinates
@@ -13,8 +14,8 @@ function fetchdata(lat, lng, callback) {
 	var sunsetStr = times.sunset.getHours() + ':' + times.sunset.getMinutes();
 	var dawndusk = [
 		{
-			'sunrise' : sunriseStr,
-			'sunset' : sunsetStr
+			'sunrise' : times.sunrise,
+			'sunset' : times.sunset
 		}
 	];
 	callback(dawndusk);
@@ -35,7 +36,7 @@ getDawnDusk.fetchdata(59.274302, 15.209713, function (data) {
 // Intergrate into mongodb to fetch this data once a day and store.
 // Let another function check if devices are bound to be turn on/off
 // at given sunrise or sunset defined in some settings panel or the Unit/Group view.
-fetchdata(59.274302, 15.209713, function (data) {
-	console.log('sun up: ' + data[0].sunrise);
-	console.log('sun down: ' + data[0].sunset);
+fetchdata(homeInfo.Latitude, homeInfo.Longitude, function (data) {
+	console.log('sun up: ' + data[0].sunrise.getHours() + ':' + data[0].sunrise.getMinutes());
+	console.log('sun down: ' + data[0].sunset.getHours() + ':' + data[0].sunset.getMinutes());
 });
