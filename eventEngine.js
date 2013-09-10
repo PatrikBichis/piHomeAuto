@@ -1,4 +1,4 @@
-var suncalc = require('suncalc');
+var dawndusk = require('./routes/api/sun.js');
 var control = require('piHomeAutoControl').control();
 var eventEngine = require('piHomeAutoConfig').piHomeAutoConfig().eventEngine;
 var homeInfo = require('piHomeAutoConfig').piHomeAutoConfig().homeInfo;
@@ -7,16 +7,21 @@ var db = null;
 
 exports.initEventEngine = function(db){
 	db = db;
-	setTimeout(runEventEngine, eventEngine.pollRate);
+	console.log("Event engine is init..");
+	init();
 };
+
+var init = function(){
+	setTimeout(runEventEngine, eventEngine.pollRate);
+}
 
 var runEventEngine = function(){
 	// Intergrate into mongodb to fetch this data once a day and store.
 	// Let another function check if devices are bound to be turn on/off
 	// at given sunrise or sunset defined in some settings panel or the Unit/Group view.
-	fetchdata(homeInfo.Latitude, homeInfo.Longitude, function (sunData) {
+	dawndusk.fetchdata(homeInfo.Latitude, homeInfo.Longitude, function (sunData) {
 		checkAllGroups(function(){
-			initEventEngine();
+			init();
 		}, control.groups, control.groups.length, 0, sunData);
 	});
 }
@@ -28,9 +33,9 @@ var checkAllGroups = function(callback, array, length, i, sunData){
 	var i = i;
 	var sunData = sunData;
 
-	if(length <= i){
+	if(i < length){
 		checkGroup(function(){
-			checkAllGroups(callback, array, length, i++, sunData);
+			checkAllGroups(callback, array, length, i + 1, sunData);
 		}, array[i]), sunData;
 	}else{
 		callback();
@@ -38,49 +43,118 @@ var checkAllGroups = function(callback, array, length, i, sunData){
 
 }
 
+var checkAction = function(callback, state, stateValue, action, name){
+	var Time = new Date;
+	var now = new Date;
+
+	if(action.useTime){
+
+		//console.log("Check on time event " + Group.name);
+
+		if(action.time.length > 0){
+			Time.setHours(action.time[0].hours, action.time[0].minutes, action.time[0].seconds);
+
+			if(now > Time){
+				Time.setMilliseconds(Time.getMilliseconds()+eventEngine.pollRate);
+				if(now < Time){
+					if(state){
+						stateValue.on = true;
+					}else{
+						stateValue.off = true;
+					}
+					
+					console.log("On timer event " + name);
+				}
+
+			}
+		}	
+	}
+
+	callback(stateValue);
+}
+
 var checkGroup = function(callback, Group, sunData){
 
 	var onAction = Group.onAction;
-	var now = new Date.now();
-	var onTime = new Date.now();
-	var offTime = new Date.now();
-	var on = false;
-	var off = false;
+	var offAction = Group.offAction;
+	var now = new Date;
+	var onTime = new Date;
+	var offTime = new Date;
 
+	var state = {on:false,off:false};
+
+	//console.log("Check events for group " + Group.name);
+	checkAction(function(state){
+		state = state;
+		checkAction(function(state){
+			state = state;
+
+			var data = {units : Group.units, value : false};
+
+			if(state.on){
+				data.value = true;
+				control.setGroup(function(){
+					if(state.off){
+						control.setGroup(function(){
+							callback();
+						},data);
+					}else{
+						callback();
+					}
+				},data);
+			}else if(state.off){
+				control.setGroup(function(){
+					callback();
+				},data);	
+			}else{
+				callback();
+			}
+		}, false, state, Group.offAction, Group.name);
+	}, true, state, Group.onAction, Group.name);
+
+	/*
 	if(onAction.useTime){
 
-		onTime.setHours(onAction.time.hours);
-		onTime.setMinutes(onAction.time.minutes);
-		onTime.setSeconds(onAction.time.seconds);
+		//console.log("Check on time event " + Group.name);
 
-		if(now > onTime){
-			onTime.setMilliseconds(onTime.getMilliseconds()+(eventEngine.pollRate*2);
+		if(onAction.time.length > 0){
+			onTime.setHours(onAction.time[0].hours, onAction.time[0].minutes, onAction.time[0].seconds);
+
 			if(now > onTime){
-				on = true;
-			}
+				onTime.setMilliseconds(onTime.getMilliseconds()+eventEngine.pollRate);
+				if(now < onTime){
+					state.on = true;
+					console.log("On timer event " + Group.name);
+				}
 
-		}
+			}
+		}	
 	}
 
 	if(offAction.useTime){
 
-		offTime.setHours(offAction.time.hours);
-		offTime.setMinutes(offAction.time.minutes);
-		offTime.setSeconds(offAction.time.seconds);
+		//console.log("Check off time event " + Group.name);
 
-		if(now > offTime){
-			offTime.setMilliseconds(offTime.getMilliseconds()+(eventEngine.pollRate*2);
+		if(offAction.time.length > 0){
+			offTime.setHours(offAction.time[0].hours, offAction.time[0].minutes, offAction.time[0].seconds);
+
 			if(now > offTime){
-				off = true;
-			}
+				offTime.setMilliseconds(offTime.getMilliseconds()+eventEngine.pollRate);
+				if(now < offTime){
+					state.off = true;
+					console.log("Off timer event " + Group.name);
+				}
 
+			}
 		}
 	}
 
-	if(on){
-		var data = {};
+	var data = {units : Group.units, value : false};
+
+	if(state.on){
+		data.value = true;
 		control.setGroup(function(){
-			if(off){
+			if(state.off){
 				control.setGroup(function(){
 					callback();
 				},data);
@@ -88,9 +162,15 @@ var checkGroup = function(callback, Group, sunData){
 				callback();
 			}
 		},data);
+	}else if(state.off){
+		control.setGroup(function(){
+			callback();
+		},data);	
 	}else{
 		callback();
 	}
-	
+	//console.log("Events for groupe" + Group.name + " On:"+on+", Off:"+off);
+	//callback();
+	*/
 }
 

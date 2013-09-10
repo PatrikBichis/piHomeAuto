@@ -6,7 +6,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , addin = require("./Addin.Core").Core()
-  , dawndusk = require('./routes/api/sun.js');
+  , dawndusk = require('./routes/api/sun.js')
+  , eventEngine = require('./eventEngine.js');
 
 var app = express();
 
@@ -30,5 +31,6 @@ if ('development' == app.get('env')) {
 addin.installAddins(app, function(){
   http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
+    eventEngine.initEventEngine(null);
   });
 });
