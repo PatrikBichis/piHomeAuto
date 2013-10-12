@@ -1,0 +1,16 @@
+extends secondery
+
+block content
+  //- h1 piHomeAuto
+  //- br
+  //- h4 Enheter i huset
+  img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
+  div.span6
+    table.striped
+      thead
+        tr 
+          th Plats
+      tbody(data-bind="foreach: units") 
+        tr
+          td
+            p(data-bind="text: name") 

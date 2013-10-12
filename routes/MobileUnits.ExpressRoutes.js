@@ -16,7 +16,7 @@ exports.initAddin = function(app, addin){
 		res.render("MobileUnitsListView.jade", { title: "Units", subTitle: "Control lights", tilesData: addin.getTiles(), viewModelFiles: addin.getViewModelFiles(), routesFiles: addin.getRoutesFiles(), noHeader: true});
 		})
 	// Api routes
-	app.get("Units/List", MobileUnitsController.list);
+	app.get("/Units/List", MobileUnitsController.list);
 	app.post("/Units/SetUnit", MobileUnitsController.setUnit);
 	app.get("/Control/ListGroups", MobileUnitsController.listGroups);
 	app.post("/Control/SetGroup", MobileUnitsController.setGroup);

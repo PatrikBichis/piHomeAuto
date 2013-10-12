@@ -29,7 +29,7 @@ var config = function(){
 
 	self.apiRoutes = [
 		{
-			route: "Units/List",
+			route: "/Units/List",
 			function: "list",
 			type: "get",
 			controller: "MobileUnitsController"

@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "3.2.5",
     "jade": "*",
+    "mongoose": "*",
     "less-middleware": "*",
     "request": "*",
     "string": "*",

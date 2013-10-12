@@ -1,0 +1,54 @@
+extends secondery
+
+block content
+  //- h1 piHomeAuto
+  //- br
+  //- h4 Enheter i huset
+  img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
+  div.span6
+    h3 Units
+    table.striped
+      thead
+        tr 
+          th Id
+          th Name
+          th Protocol
+          th Model
+          th House
+          th Unit
+          th Delete
+      tbody(data-bind="foreach: units") 
+        tr
+          td
+            p(data-bind='text: _id')
+          td
+            p(data-bind='text: name')
+          td
+            p(data-bind='text: protocol')
+          td
+            p(data-bind='text: model')
+          td
+            p(data-bind='text: house')
+          td
+            p(data-bind='text: unit')
+          td
+            button(data-bind='click: $root.deleteUnit') X
+    div.span4
+      table
+        tbody
+          tr
+            td
+              input(type='text', placeholder='Id', data-bind='value: unitId')
+            td
+              input(type='text', placeholder='Name', data-bind='value: unitName')
+            td
+              input(type='text', placeholder='Protocol', data-bind='value: unitProtocol')
+            tr
+            td
+              input(type='text', placeholder='Model', data-bind='value: unitModel')
+            td
+              input(type='text', placeholder='House', data-bind='value: unitHouse')
+            td
+              input(type='text', placeholder='House Unit', data-bind='value: unitUnit')
+            td
+              button(data-bind='click: $root.addNewUnit') Add

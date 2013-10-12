@@ -1,0 +1,44 @@
+var control = require('piHomeAutoControl').control();
+var mongoose = require('mongoose');
+var units = mongoose.model('Unit');
+
+
+// Response with all tellstick devices 
+exports.listUnits = function(req, res){
+	units.find({}, null, {sort:{_id: 1}},function (err, data) {
+		if (err) throw err;
+		res.json(JSON.stringify(data)); 
+	});
+}
+
+exports.deleteUnit = function(req, res){
+
+	// Check that request was a JSON req.
+  	if(req.is('application/json')){
+
+    // the bodyParser has allready parsed the JSON string
+    // in the req.body
+    var data = req.body;
+    units.find(data, function (err, data) {
+		if (err) throw err;
+	}).remove();
+    
+    res.json(JSON.stringify(true));
+  }
+}
+
+exports.addUnit = function(req, res){
+
+	// Check that request was a JSON req.
+  	if(req.is('application/json')){
+
+    // the bodyParser has allready parsed the JSON string
+    // in the req.body
+    var data = req.body;
+    units.create(data, function (err, data) {
+		if (err) throw err;
+	});
+    //console.log(data);
+    res.json(JSON.stringify(true));
+  }
+};
