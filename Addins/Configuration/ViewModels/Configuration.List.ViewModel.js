@@ -33,13 +33,13 @@ var ConfigurationViewModel = function () {
         $.Dialog({
             'title'       : 'My dialog title',
             'content'     : 'HTML content',
-            'draggable'   : true,
+            'draggable'   : false,
             'overlay'     : true,
             'closeButton' : true,
             'buttonsAlign': 'right',
             'keepOpened'  : true,
             'position'    : {
-                'zone'    : 'right'
+                'zone'    : 'center'
             },
             'buttons'     : {
                 'button1'     : {
