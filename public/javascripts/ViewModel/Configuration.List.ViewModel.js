@@ -28,6 +28,31 @@ var ConfigurationViewModel = function () {
     }); 
   }
 
+  self.popAddUnit = function() {
+    $(document).ready(function(){
+        $.Dialog({
+            'title'       : 'My dialog title',
+            'content'     : 'HTML content',
+            'draggable'   : true,
+            'overlay'     : true,
+            'closeButton' : true,
+            'buttonsAlign': 'right',
+            'keepOpened'  : true,
+            'position'    : {
+                'zone'    : 'right'
+            },
+            'buttons'     : {
+                'button1'     : {
+                    'action': function(){}
+                },
+                'button2'     : {
+                    'action': function(){}
+                }
+            }
+        });
+    });
+  }
+
  self.addNewUnit = function(){
     self.waiting(true);
     data = { 
