@@ -7,7 +7,9 @@ var schema = mongoose.Schema({
 	model: String,
 	house: Number,
 	unit: Number,
-	currentvalue: Boolean
+	currentvalue: Boolean,
+	map_x: Number,
+	map_y: Number
 });
 
 

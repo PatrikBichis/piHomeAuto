@@ -5,6 +5,7 @@ block content
   //- br
   //- h4 Enheter i huset
   img(src = 'images/metroui/preloader-w8-cycle-black.gif', data-bind="visible: waiting")
+  p Everything still uses piHomeAutoConfig, this is for testing.
   div.span6
     h3 Units
     table.striped
@@ -33,16 +34,16 @@ block content
             p(data-bind='text: unit')
           td
             button(data-bind='click: $root.deleteUnit') X
-    div.span4
+    div.span6
       table
         tbody
           tr
             td
-              input(type='text', placeholder='Id', data-bind='value: unitId')
+              input#unit(type='text', placeholder='Id', data-bind='value: unitId')
             td
-              input(type='text', placeholder='Name', data-bind='value: unitName')
+              input#unit(type='text', placeholder='Name', data-bind='value: unitName')
             td
-              input(type='text', placeholder='Protocol', data-bind='value: unitProtocol')
+              input#unit(type='text', placeholder='Protocol', data-bind='value: unitProtocol')
             tr
             td
               input(type='text', placeholder='Model', data-bind='value: unitModel')
@@ -52,3 +53,34 @@ block content
               input(type='text', placeholder='House Unit', data-bind='value: unitUnit')
             td
               button(data-bind='click: $root.addNewUnit') Add
+
+    div.span6
+      h3 Groups
+      table.striped
+        thead
+          tr 
+            th Id
+            th Name
+            th Member units
+        tbody(data-bind="foreach: groups") 
+          tr
+            td
+              p(data-bind='text: _id')
+            td
+              p(data-bind='text: name')
+            td
+              p(data-bind='text: units')
+            td
+              button(data-bind='click: $root.deleteGroup') X
+    div.span6
+      table
+        tbody
+          tr
+            td
+              input(type='text', placeholder='Id', data-bind='value: groupId')
+            td
+              input(type='text', placeholder='Name', data-bind='value: groupName')
+            td
+              input(type='text', placeholder='List of units', data-bind='value: groupUnits')
+            td
+              button(data-bind='click: $root.addNewGroup') Add

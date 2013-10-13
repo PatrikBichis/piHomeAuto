@@ -43,6 +43,21 @@ var config = function(){
 			function: "deleteUnit",
 			type: "post",
 			controller: "ConfigurationController"
+		},{
+			route: "/Configuration/listGroups",
+			function: "listGroups",
+			type: "get",
+			controller: "ConfigurationController"
+		},{
+			route: "/Configuration/addGroup",
+			function: "addGroup",
+			type: "post",
+			controller: "ConfigurationController"
+		},{
+			route: "/Configuration/deleteGroup",
+			function: "deleteGroup",
+			type: "post",
+			controller: "ConfigurationController"
 		}
 	]
 

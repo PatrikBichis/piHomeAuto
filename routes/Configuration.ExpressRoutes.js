@@ -19,4 +19,7 @@ exports.initAddin = function(app, addin){
 	app.get("/Configuration/listUnits", ConfigurationController.listUnits);
 	app.post("/Configuration/addUnit", ConfigurationController.addUnit);
 	app.post("/Configuration/deleteUnit", ConfigurationController.deleteUnit);
+	app.get("/Configuration/listGroups", ConfigurationController.listGroups);
+	app.post("/Configuration/addGroup", ConfigurationController.addGroup);
+	app.post("/Configuration/deleteGroup", ConfigurationController.deleteGroup);
 }
