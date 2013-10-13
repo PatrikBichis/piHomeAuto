@@ -8,6 +8,7 @@ block content
   p Everything still uses piHomeAutoConfig, this is for testing.
   div.span6
     h3 Units
+    hr
     table.striped
       thead
         tr 
@@ -33,7 +34,8 @@ block content
           td
             p(data-bind='text: unit')
           td
-            button(data-bind='click: $root.deleteUnit') X
+            button.bg-color-red(data-bind='click: $root.deleteUnit') Remove
+    button.bg-color-green(data-bind='click: $root.popAddUnit') Test dialog
     div.span6
       table
         tbody
@@ -53,27 +55,28 @@ block content
               input(type='text', placeholder='House Unit', data-bind='value: unitUnit')
             td
               button(data-bind='click: $root.addNewUnit') Add
-              button(data-bind='click: $root.popAddUnit') Pop
 
-    div.span6
-      h3 Groups
-      table.striped
-        thead
-          tr 
-            th Id
-            th Name
-            th Member units
-        tbody(data-bind="foreach: groups") 
-          tr
-            td
-              p(data-bind='text: _id')
-            td
-              p(data-bind='text: name')
-            td
-              p(data-bind='text: units')
-            td
-              button(data-bind='click: $root.deleteGroup') X
-    div.span6
+  div.span6
+    h3 Groups
+    hr
+    table.striped
+      thead
+        tr 
+          th Id
+          th Name
+          th Member units
+      tbody(data-bind="foreach: groups") 
+        tr
+          td
+            p(data-bind='text: _id')
+          td
+            p(data-bind='text: name')
+          td
+            p(data-bind='text: units')
+          td
+            button.bg-color-red(data-bind='click: $root.deleteGroup') Remove
+    //button.bg-color-green(data-bind='click: $root.popAddGroup') New Group
+  div.span6
       table
         tbody
           tr

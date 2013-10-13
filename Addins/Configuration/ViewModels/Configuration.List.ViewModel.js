@@ -28,31 +28,6 @@ var ConfigurationViewModel = function () {
     }); 
   }
 
-  self.popAddUnit = function() {
-    $(document).ready(function(){
-        $.Dialog({
-            'title'       : 'My dialog title',
-            'content'     : 'HTML content',
-            'draggable'   : false,
-            'overlay'     : true,
-            'closeButton' : true,
-            'buttonsAlign': 'right',
-            'keepOpened'  : true,
-            'position'    : {
-                'zone'    : 'center'
-            },
-            'buttons'     : {
-                'button1'     : {
-                    'action': function(){}
-                },
-                'button2'     : {
-                    'action': function(){}
-                }
-            }
-        });
-    });
-  }
-
  self.addNewUnit = function(){
     self.waiting(true);
     data = { 
@@ -66,6 +41,7 @@ var ConfigurationViewModel = function () {
       map_x: 0,
       map_y: 0
     };
+    console.log('data is: ' + data);
     $.ajax({
           type: "POST",
           url: "/Configuration/addUnit", // your POST target goes here
@@ -138,6 +114,50 @@ self.deleteUnit = function(unit){
       });
       self.loadConfig();
     }
+  }
+
+ self.popAddUnit = function() {
+        $.Dialog({
+            'title'       : 'Add new unit',
+            'content'     : '<input data-bind="modal: unitId" />',
+            'draggable'   : false,
+            'overlay'     : true,
+            'closeButton' : true,
+            'buttonsAlign': 'right',
+            'keepOpened'  : false,
+            'position'    : {
+                'zone'    : 'center'
+            },
+            'buttons'     : {
+                'Add'     : {
+                    'action': function(){
+                      console.log('got ' + self.unitId());
+                    }
+                }
+            }
+        });
+  }
+
+  self.popAddGroup = function() {
+    $(document).ready(function(){
+        $.Dialog({
+            'title'       : 'Add new group',
+            'content'     : '<input type="text" placeholder="Id" data-bind="value: groupId">',
+            'draggable'   : false,
+            'overlay'     : true,
+            'closeButton' : true,
+            'buttonsAlign': 'right',
+            'keepOpened'  : true,
+            'position'    : {
+                'zone'    : 'center'
+            },
+            'buttons'     : {
+                'Add'     : {
+                    'action': function(){}
+                }
+            }
+        });
+    });
   }
 
   self.dummy = function(){
