@@ -41,7 +41,6 @@ var ConfigurationViewModel = function () {
       map_x: 0,
       map_y: 0
     };
-    console.log('data is: ' + data);
     $.ajax({
           type: "POST",
           url: "/Configuration/addUnit", // your POST target goes here
@@ -51,10 +50,14 @@ var ConfigurationViewModel = function () {
           success: function (data)
           {
               self.waiting(false);
+              if (data) {
+                self.loadConfig();
+              }
+              else {
+                console.log('add ID allready exists here...');
+              }
           }
     });
-    self.units.push(data);
-    document.getElementById(id).reset();
   }
 
 self.deleteUnit = function(unit){
@@ -91,10 +94,15 @@ self.deleteUnit = function(unit){
           data: JSON.stringify(data), // message to send goes here
           success: function (data)
           {
-              self.waiting(false);
+            if (data) {
+                self.loadConfig();
+              }
+              else {
+                console.log('add GROUP ID allready exists here...');
+              }
+            self.waiting(false);
           }
     });
-    self.groups.push(data);
   }
 
   self.deleteGroup = function(group){
@@ -117,25 +125,25 @@ self.deleteUnit = function(unit){
   }
 
  self.popAddUnit = function() {
-        $.Dialog({
-            'title'       : 'Add new unit',
-            'content'     : '<input data-bind="modal: unitId" />',
-            'draggable'   : false,
-            'overlay'     : true,
-            'closeButton' : true,
-            'buttonsAlign': 'right',
-            'keepOpened'  : false,
-            'position'    : {
-                'zone'    : 'center'
-            },
-            'buttons'     : {
-                'Add'     : {
-                    'action': function(){
-                      console.log('got ' + self.unitId());
-                    }
+    $.Dialog({
+        'title'       : 'Add new unit',
+        'content'     : '<input data-bind="value: unitId" />',
+        'draggable'   : false,
+        'overlay'     : true,
+        'closeButton' : true,
+        'buttonsAlign': 'right',
+        'keepOpened'  : false,
+        'position'    : {
+            'zone'    : 'center'
+        },
+        'buttons'     : {
+            'Add'     : {
+                'action': function() {
+                  console.log('got ' + self.unitId());
                 }
             }
-        });
+        }
+    });
   }
 
   self.popAddGroup = function() {

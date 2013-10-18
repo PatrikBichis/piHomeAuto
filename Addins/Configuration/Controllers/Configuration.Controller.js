@@ -37,18 +37,21 @@ exports.deleteUnit = function(req, res){
 }
 
 exports.addUnit = function(req, res){
-
-	// Check that request was a JSON req.
-  	if(req.is('application/json')){
-
-    // the bodyParser has allready parsed the JSON string
-    // in the req.body
-    var data = req.body;
-    units.create(data, function (err, data) {
-		if (err) throw err;
-	});
-    //console.log(data);
-    res.json(JSON.stringify(true));
+	if(req.is('application/json')){
+    var toInsert = req.body;
+    units.findById(toInsert._id, function (err, data) {
+      if (data === undefined || data === null) {
+        res.json(JSON.stringify(true));
+        console.log('nothing found, go ahead and create');
+        units.create(toInsert, function (err, data) {
+          if (err) throw err;
+        });
+      }
+      else {
+        res.json(JSON.stringify(false));
+        console.log('allready exists!');
+      }
+    });
   }
 }
 
@@ -72,14 +75,19 @@ exports.addGroup = function(req, res){
 
   // Check that request was a JSON req.
     if(req.is('application/json')){
-
-    // the bodyParser has allready parsed the JSON string
-    // in the req.body
-    var data = req.body;
-    groups.create(data, function (err, data) {
-    if (err) throw err;
-  });
-    //console.log(data);
-    res.json(JSON.stringify(true));
-  }
+      var toInsert = req.body;
+        groups.findById(toInsert._id, function (err, data) {
+          if (data === undefined || data === null) {
+            res.json(JSON.stringify(true));
+            console.log('nothing found, go ahead and create');
+            groups.create(toInsert, function (err, data) {
+              if (err) throw err;
+            });
+          }
+          else {
+            res.json(JSON.stringify(false));
+            console.log('allready exists!');
+          }
+        });
+  }    
 };
