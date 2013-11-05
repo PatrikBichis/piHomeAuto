@@ -9,6 +9,7 @@ It's made to be run on an raspberry pi.
 
 Node.js/Express.js app for home automation
 
+https://github.com/x-firm/piHomeAuto/wiki
 
 Dependencies for the Raspberry pi
  * You need to have Node.js installed.
